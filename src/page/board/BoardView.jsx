@@ -18,8 +18,12 @@ export function BoardView() {
   const toast = useToast();
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get(`/api/board/${id}`).then((res) => {
-      setBoard(res.data).catch((err) => {
+    axios
+      .get(`/api/board/${id}`)
+      .then((res) => {
+        setBoard(res.data);
+      })
+      .catch((err) => {
         if (err.response.status === 404) {
           toast({
             status: "info",
@@ -29,7 +33,6 @@ export function BoardView() {
           navigate("/");
         }
       });
-    });
   }, []);
 
   function handleClickRemove() {
