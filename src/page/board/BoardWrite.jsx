@@ -18,6 +18,15 @@ export function BoardWrite() {
   const toast = useToast();
   const navigate = useNavigate();
 
+  let disableSaveButton = false;
+  if (title.trim().length === 0) {
+    disableSaveButton = true;
+  } else if (content.trim().length === 0) {
+    disableSaveButton = true;
+  } else if (writer.trim().length === 0) {
+    disableSaveButton = true;
+  }
+
   function handleSaveClick() {
     axios
       .post("api/board/add", {
@@ -33,7 +42,17 @@ export function BoardWrite() {
         });
         navigate("/");
       })
-      .catch()
+      .catch((e) => {
+        const code = e.response.status;
+
+        if (code === 400) {
+          toast({
+            status: "error",
+            description: "등록되지 않았습니다. 입력한 내용을 확인하세요.",
+            position: "bottom-right",
+          });
+        }
+      })
       .finally();
   }
 
@@ -59,7 +78,11 @@ export function BoardWrite() {
         </FormControl>
       </Box>
       <Box>
-        <Button colorScheme={"blue"} onClick={handleSaveClick}>
+        <Button
+          isDisabled={disableSaveButton}
+          colorScheme={"blue"}
+          onClick={handleSaveClick}
+        >
           저장
         </Button>
       </Box>
