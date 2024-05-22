@@ -11,8 +11,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export function MemberInfo() {
-  const { id } = useParams();
   const [member, setMember] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { id } = useParams();
+
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -34,6 +36,31 @@ export function MemberInfo() {
       })
       .finally();
   }, []);
+
+  function handleClickRemove() {
+    setIsLoading(true);
+
+    axios
+      .delete(`/api/member/${id}`)
+      .then(() => {
+        toast({
+          status: "success",
+          description: "안전하게 탈퇴되었습니다.",
+          position: "bottom-right",
+        });
+        navigate("/");
+      })
+      .catch(() => {
+        toast({
+          status: "warning",
+          description: "회원 탈퇴 중 문제가 발생하였습니다.",
+          position: "bottom-right",
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
 
   if (member === null) {
     return <Spinner />;
@@ -59,7 +86,13 @@ export function MemberInfo() {
           <Button colorScheme={"purple"} mr={1}>
             수정
           </Button>
-          <Button colorScheme={"red"}>삭제</Button>
+          <Button
+            isLoading={isLoading}
+            colorScheme={"red"}
+            onClick={handleClickRemove}
+          >
+            탈퇴
+          </Button>
         </Box>
       </Box>
     </Box>
