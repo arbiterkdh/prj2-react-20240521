@@ -21,6 +21,7 @@ export function MemberSignup() {
   const [isLoading, setIsLoading] = useState(false);
   const [isCheckedEmail, setIsCheckedEmail] = useState(false);
   const [isCheckedNickName, setIsCheckedNickName] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(false);
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -138,6 +139,10 @@ export function MemberSignup() {
     isNickNameCheckDisabled = false;
   }
 
+  if (!isValidEmail) {
+    isEmailCheckDisabled = true;
+  }
+
   return (
     <Box>
       <Box>회원 가입</Box>
@@ -151,6 +156,7 @@ export function MemberSignup() {
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setIsCheckedEmail(false);
+                  setIsValidEmail(!e.target.validity.typeMismatch);
                 }}
               />
               <InputRightElement w={"75px"} mr={1}>
@@ -163,7 +169,13 @@ export function MemberSignup() {
                 </Button>
               </InputRightElement>
             </InputGroup>
-            {isCheckedEmail || (
+
+            {isValidEmail || (
+              <FormHelperText>
+                올바른 이메일 형식으로 작성해주세요.
+              </FormHelperText>
+            )}
+            {isValidEmail && !isCheckedEmail && (
               <FormHelperText>이메일 중복확인을 해주세요.</FormHelperText>
             )}
           </FormControl>
@@ -194,8 +206,9 @@ export function MemberSignup() {
             <FormLabel>별명</FormLabel>
             <InputGroup>
               <Input
+                value={nickName}
                 onChange={(e) => {
-                  setNickName(e.target.value);
+                  setNickName(e.target.value.trim());
                   setIsCheckedNickName(false);
                 }}
               />
