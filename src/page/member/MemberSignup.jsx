@@ -64,11 +64,13 @@ export function MemberSignup() {
         });
       })
       .catch((err) => {
-        toast({
-          status: "info",
-          description: "사용 가능한 이메일입니다.",
-          position: "bottom-right",
-        });
+        if (err.response.status === 404) {
+          toast({
+            status: "info",
+            description: "사용 가능한 이메일입니다.",
+            position: "bottom-right",
+          });
+        }
       })
       .finally();
   }
