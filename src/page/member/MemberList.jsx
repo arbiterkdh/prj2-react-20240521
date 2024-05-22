@@ -10,9 +10,12 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function MemberList() {
   const [memberList, setMemberList] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("/api/member/list").then((res) => setMemberList(res.data));
@@ -37,11 +40,16 @@ export function MemberList() {
           </Thead>
           <Tbody>
             {memberList.map((member) => (
-              <Tr key={member.id}>
+              <Tr
+                cursor={"pointer"}
+                _hover={{ bgColor: "gray.200" }}
+                onClick={() => navigate(`/member/${member.id}`)}
+                key={member.id}
+              >
                 <Td>{member.id}</Td>
                 <Td>{member.email}</Td>
                 <Td>{member.nickName}</Td>
-                <Td>{member.inserted}</Td>
+                <Td>{member.signupDateAndTime}</Td>
               </Tr>
             ))}
           </Tbody>
