@@ -109,6 +109,8 @@ export function MemberSignup() {
   const isCheckedPassword = password === passwordCheck;
 
   let isDisabled = false;
+  let isEmailCheckDisabled = true;
+  let isNickNameCheckDisabled = true;
 
   if (!isCheckedPassword) {
     isDisabled = true;
@@ -128,6 +130,14 @@ export function MemberSignup() {
     isDisabled = true;
   }
 
+  if (email.trim().length > 0) {
+    isEmailCheckDisabled = false;
+  }
+
+  if (nickName.trim().length > 0) {
+    isNickNameCheckDisabled = false;
+  }
+
   return (
     <Box>
       <Box>회원 가입</Box>
@@ -144,11 +154,18 @@ export function MemberSignup() {
                 }}
               />
               <InputRightElement w={"75px"} mr={1}>
-                <Button onClick={handleCheckEmail} size={"sm"}>
+                <Button
+                  isDisabled={isEmailCheckDisabled}
+                  onClick={handleCheckEmail}
+                  size={"sm"}
+                >
                   중복확인
                 </Button>
               </InputRightElement>
             </InputGroup>
+            {isCheckedEmail || (
+              <FormHelperText>이메일 중복확인을 해주세요.</FormHelperText>
+            )}
           </FormControl>
         </Box>
         <Box>
@@ -183,11 +200,18 @@ export function MemberSignup() {
                 }}
               />
               <InputRightElement w={"75px"} mr={1}>
-                <Button onClick={handleCheckNickName} size={"sm"}>
+                <Button
+                  isDisabled={isNickNameCheckDisabled}
+                  onClick={handleCheckNickName}
+                  size={"sm"}
+                >
                   중복확인
                 </Button>
               </InputRightElement>
             </InputGroup>
+            {isCheckedNickName || (
+              <FormHelperText>별명 중복확인을 해주세요.</FormHelperText>
+            )}
           </FormControl>
         </Box>
         <Box>
