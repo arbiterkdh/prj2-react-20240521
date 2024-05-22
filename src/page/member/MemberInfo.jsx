@@ -3,7 +3,14 @@ import {
   Button,
   FormControl,
   Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Spinner,
+  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,6 +21,7 @@ export function MemberInfo() {
   const [member, setMember] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -86,14 +94,30 @@ export function MemberInfo() {
           <Button colorScheme={"purple"} mr={1}>
             수정
           </Button>
-          <Button
-            isLoading={isLoading}
-            colorScheme={"red"}
-            onClick={handleClickRemove}
-          >
+          <Button colorScheme={"red"} onClick={onOpen}>
             탈퇴
           </Button>
         </Box>
+
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader></ModalHeader>
+            <ModalBody>정말로 탈퇴하시겠습니까?</ModalBody>
+            <ModalFooter>
+              <Button onClick={onClose} mr={1}>
+                취소
+              </Button>
+              <Button
+                isLoading={isLoading}
+                onClick={handleClickRemove}
+                colorScheme={"blue"}
+              >
+                확인
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </Box>
     </Box>
   );
