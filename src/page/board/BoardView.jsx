@@ -100,6 +100,7 @@ export function BoardView() {
         <Button
           colorScheme={"purple"}
           onClick={() => navigate(`/edit/${board.id}`)}
+          mr={1}
         >
           수정
         </Button>

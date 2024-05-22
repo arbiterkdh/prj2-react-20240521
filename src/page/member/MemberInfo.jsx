@@ -1,4 +1,11 @@
-import { Box, FormControl, Input, Spinner, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormControl,
+  Input,
+  Spinner,
+  useToast,
+} from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -16,12 +23,14 @@ export function MemberInfo() {
         setMember(res.data);
       })
       .catch((err) => {
-        toast({
-          status: "error",
-          description: "존재하지 않는 회원입니다.",
-          position: "bottom-right",
-        });
-        navigate("/member/list");
+        if (err.response.status === 404) {
+          toast({
+            status: "error",
+            description: "존재하지 않는 회원입니다.",
+            position: "bottom-right",
+          });
+          navigate("/member/list");
+        }
       })
       .finally();
   }, []);
@@ -45,6 +54,12 @@ export function MemberInfo() {
         <Box>
           <FormControl>가입일시</FormControl>
           <Input value={member.signupDateAndTime} readOnly />
+        </Box>
+        <Box>
+          <Button colorScheme={"purple"} mr={1}>
+            수정
+          </Button>
+          <Button colorScheme={"red"}>삭제</Button>
         </Box>
       </Box>
     </Box>
