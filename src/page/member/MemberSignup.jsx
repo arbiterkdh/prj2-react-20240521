@@ -154,15 +154,13 @@ export function MemberSignup() {
             <InputGroup>
               <Input
                 type={"email"}
-                className={"myInput"}
-                // focusBorderColor={"orange.400"}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setIsCheckedEmail(false);
                   setIsValidEmail(!e.target.validity.typeMismatch);
                 }}
               />
-              <InputRightElement w={"75px"} mr={1}>
+              <InputRightElement w={"75px"}>
                 <Button
                   isDisabled={isEmailCheckDisabled}
                   onClick={handleCheckEmail}
@@ -228,7 +226,7 @@ export function MemberSignup() {
                   setIsCheckedNickName(false);
                 }}
               />
-              <InputRightElement w={"75px"} mr={1}>
+              <InputRightElement w={"75px"}>
                 <Button
                   isDisabled={isNickNameCheckDisabled}
                   onClick={handleCheckNickName}
@@ -249,7 +247,6 @@ export function MemberSignup() {
         <Box>
           <Button
             isLoading={isLoading}
-            colorScheme={"blue"}
             onClick={handleClick}
             isDisabled={isDisabled}
           >

@@ -122,9 +122,7 @@ export function MemberInfo() {
               </FormControl>
             </ModalBody>
             <ModalFooter>
-              <Button onClick={onClose} mr={1}>
-                취소
-              </Button>
+              <Button onClick={onClose}>취소</Button>
               <Button
                 isLoading={isLoading}
                 onClick={handleClickRemove}

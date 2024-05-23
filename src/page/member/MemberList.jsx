@@ -41,8 +41,6 @@ export function MemberList() {
           <Tbody>
             {memberList.map((member) => (
               <Tr
-                cursor={"pointer"}
-                _hover={{ bgColor: "gray.200" }}
                 onClick={() => navigate(`/member/${member.id}`)}
                 key={member.id}
               >

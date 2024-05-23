@@ -1,5 +1,5 @@
 import React from "react";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home } from "./page/Home.jsx";
 import { BoardWrite } from "./page/board/BoardWrite.jsx";
@@ -10,18 +10,8 @@ import { MemberSignup } from "./page/member/MemberSignup.jsx";
 import { MemberList } from "./page/member/MemberList.jsx";
 import { MemberInfo } from "./page/member/MemberInfo.jsx";
 import { MemberEdit } from "./page/member/MemberEdit.jsx";
-
-const theme = extendTheme({
-  styles: {
-    global: {
-      ".myInput": {
-        zIndex: "1",
-        borderColor: "orange",
-        boxShadow: "0 0 0 1px orange",
-      },
-    },
-  },
-});
+import { MemberLogin } from "./page/member/MemberLogin.jsx";
+import { theme } from "./Theme.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +26,7 @@ const router = createBrowserRouter([
       { path: "member/list", element: <MemberList /> },
       { path: "member/:id", element: <MemberInfo /> },
       { path: "member/edit/:id", element: <MemberEdit /> },
+      { path: "login", element: <MemberLogin /> },
     ],
   },
 ]);

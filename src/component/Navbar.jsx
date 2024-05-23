@@ -12,7 +12,10 @@ export function Navbar() {
         <Box
           onClick={() => navigate("/")}
           cursor={"pointer"}
-          _hover={{ color: "orange.700" }}
+          sx={{
+            color: "orange.500",
+            _hover: { color: "orange.400" },
+          }}
           mr={5}
         >
           <FontAwesomeIcon icon={faMugHot} />
@@ -38,6 +41,13 @@ export function Navbar() {
           _hover={{ color: "orange.400" }}
         >
           회원가입
+        </Box>
+        <Box
+          onClick={() => navigate("/login")}
+          cursor={"pointer"}
+          _hover={{ color: "orange.400" }}
+        >
+          로그인
         </Box>
       </Flex>
     </Heading>
