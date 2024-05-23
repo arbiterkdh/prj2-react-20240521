@@ -95,7 +95,11 @@ export function MemberInfo() {
           <Input value={member.signupDateAndTime} readOnly />
         </Box>
         <Box>
-          <Button colorScheme={"purple"} mr={1}>
+          <Button
+            onClick={() => navigate(`/member/edit/${member.id}`)}
+            colorScheme={"purple"}
+            mr={1}
+          >
             수정
           </Button>
           <Button colorScheme={"red"} onClick={onOpen}>

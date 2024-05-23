@@ -154,6 +154,8 @@ export function MemberSignup() {
             <InputGroup>
               <Input
                 type={"email"}
+                className={"myInput"}
+                // focusBorderColor={"orange.400"}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setIsCheckedEmail(false);
