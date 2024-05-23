@@ -2,24 +2,25 @@ import { extendTheme } from "@chakra-ui/react";
 
 export const theme = extendTheme({
   components: {
-    Tr: {
+    Table: {
       baseStyle: {
-        bgColor: "orange",
-      },
-      variants: {
-        bgColor: "orange",
-        solid: {
+        table: {
+          borderCollapse: "collapse",
+          width: "100%",
+        },
+        th: {
+          cursor: "default",
+          bg: "orange.300",
+          // textColor: "white",
+        },
+        tr: {
+          cursor: "pointer",
           _hover: {
-            cursor: "pointer",
-            bg: "orange.300",
+            bg: "orange.100",
           },
         },
       },
-      defaultProps: {
-        variant: "custom",
-      },
     },
-
     Input: {
       baseStyle: {
         field: {
