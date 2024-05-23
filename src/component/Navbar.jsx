@@ -49,6 +49,16 @@ export function Navbar() {
         >
           로그인
         </Box>
+        <Box
+          onClick={() => {
+            localStorage.removeItem("token");
+            navigate("/login");
+          }}
+          cursor={"pointer"}
+          _hover={{ color: "orange.400" }}
+        >
+          로그아웃
+        </Box>
       </Flex>
     </Heading>
   );
