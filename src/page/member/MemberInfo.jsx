@@ -42,6 +42,15 @@ export function MemberInfo() {
         setMember(res.data);
       })
       .catch((err) => {
+        if (err.response.status === 403) {
+          toast({
+            status: "warning",
+            description: "본인의 정보에만 접근할 수 있습니다.",
+            position: "bottom-right",
+          });
+          navigate(-1);
+        }
+
         if (err.response.status === 404) {
           toast({
             status: "error",
