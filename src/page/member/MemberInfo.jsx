@@ -109,18 +109,20 @@ export function MemberInfo() {
           <FormControl>가입일시</FormControl>
           <Input value={member.signupDateAndTime} readOnly />
         </Box>
-        <Box>
-          <Button
-            onClick={() => navigate(`/member/edit/${member.id}`)}
-            colorScheme={"purple"}
-            mr={1}
-          >
-            수정
-          </Button>
-          <Button colorScheme={"red"} onClick={onOpen}>
-            탈퇴
-          </Button>
-        </Box>
+        {account.hasAccess(member.id) && (
+          <Box>
+            <Button
+              onClick={() => navigate(`/member/edit/${member.id}`)}
+              colorScheme={"purple"}
+              mr={1}
+            >
+              수정
+            </Button>
+            <Button colorScheme={"red"} onClick={onOpen}>
+              탈퇴
+            </Button>
+          </Box>
+        )}
 
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
