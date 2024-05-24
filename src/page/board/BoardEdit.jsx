@@ -31,11 +31,7 @@ export function BoardEdit() {
 
   function handleClickSave() {
     axios
-      .put("/api/board/edit", board, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+      .put("/api/board/edit", board)
       .then(() => {
         toast({
           status: "success",
