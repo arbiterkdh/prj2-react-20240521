@@ -63,7 +63,13 @@ export function Navbar() {
         )}
         <Spacer />
         {account.isLoggedIn() && (
-          <Box>
+          <Box
+            onClick={() => {
+              navigate(`/member/${account.id}`);
+            }}
+            cursor={"pointer"}
+            _hover={{ color: "orange.400" }}
+          >
             {account.nickName} 님
             <FontAwesomeIcon
               icon={faCarrot}
@@ -84,7 +90,7 @@ export function Navbar() {
               navigate("/login");
             }}
             cursor={"pointer"}
-            _hover={{ color: "orange.400" }}
+            _hover={{ color: "red.500" }}
           >
             로그아웃
           </Box>
