@@ -34,7 +34,7 @@ export function Navbar() {
           </Box>
         )}
 
-        {account.isLoggedIn() && (
+        {account.isAdmin() && (
           <Box
             onClick={() => navigate("/member/list")}
             cursor={"pointer"}
