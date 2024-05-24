@@ -37,7 +37,7 @@ export function MemberSignup() {
           position: "bottom-right",
         });
         // todo: 로그인 화면으로 이동
-        navigate("/");
+        navigate("/login");
       })
       .catch((err) => {
         if (err.response.status === 400) {
