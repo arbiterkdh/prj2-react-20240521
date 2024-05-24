@@ -91,9 +91,7 @@ export function BoardEdit() {
           </FormControl>
         </Box>
         <Box>
-          <Button onClick={onOpen} colorScheme={"blue"}>
-            저장
-          </Button>
+          <Button onClick={onOpen}>저장</Button>
         </Box>
       </Box>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -103,9 +101,7 @@ export function BoardEdit() {
           <ModalBody>저장하시겠습니까?</ModalBody>
           <ModalFooter>
             <Button onClick={onClose}>취소</Button>
-            <Button onClick={handleClickSave} colorScheme={"blue"}>
-              확인
-            </Button>
+            <Button onClick={handleClickSave}>확인</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
