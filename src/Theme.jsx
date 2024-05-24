@@ -7,16 +7,21 @@ export const theme = extendTheme({
         table: {
           borderCollapse: "collapse",
           width: "100%",
-        },
-        th: {
-          cursor: "default",
-          bg: "orange.300",
-          // textColor: "white",
-        },
-        tr: {
-          cursor: "pointer",
-          _hover: {
-            bg: "orange.100",
+          thead: {
+            th: {
+              cursor: "default",
+              bg: "orange.300",
+              color: "orange.100",
+              fontSize: "1.2rem",
+            },
+          },
+          tbody: {
+            tr: {
+              cursor: "pointer",
+              _hover: {
+                bg: "orange.100",
+              },
+            },
           },
         },
       },

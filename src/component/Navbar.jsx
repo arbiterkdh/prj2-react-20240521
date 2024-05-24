@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Flex, Heading, Spacer, useToast } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCarrot, faMugHot } from "@fortawesome/free-solid-svg-icons";
+import { faCarrot, faShrimp } from "@fortawesome/free-solid-svg-icons";
 import { LoginContext } from "./LoginProvider.jsx";
 
 export function Navbar() {
@@ -21,7 +21,7 @@ export function Navbar() {
           }}
           mr={5}
         >
-          <FontAwesomeIcon icon={faMugHot} />
+          <FontAwesomeIcon icon={faShrimp} />
           HOME
         </Box>
         {account.isLoggedIn() && (
@@ -64,8 +64,12 @@ export function Navbar() {
         <Spacer />
         {account.isLoggedIn() && (
           <Box>
-            <FontAwesomeIcon icon={faCarrot} />
-            {account.nickName}
+            {account.nickName} 님
+            <FontAwesomeIcon
+              icon={faCarrot}
+              color="#DD6B20"
+              style={{ marginLeft: "10px" }}
+            />
           </Box>
         )}
         {account.isLoggedIn() && (
