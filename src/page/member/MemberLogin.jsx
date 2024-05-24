@@ -54,7 +54,10 @@ export function MemberLogin() {
       <Box>
         <FormControl>
           <FormLabel>암호</FormLabel>
-          <Input onChange={(e) => setPassword(e.target.value)} />
+          <Input
+            type={"password"}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </FormControl>
       </Box>
       <Box>
