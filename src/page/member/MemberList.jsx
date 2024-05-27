@@ -27,7 +27,7 @@ export function MemberList() {
 
   return (
     <Box>
-      <Box>회원 목록</Box>
+      <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>회원 목록</Box>
       <Box>
         <Table>
           <Thead>

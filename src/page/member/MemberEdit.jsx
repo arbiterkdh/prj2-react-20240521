@@ -123,7 +123,7 @@ export function MemberEdit() {
 
   return (
     <Box>
-      <Box>회원 정보 수정</Box>
+      <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>회원 정보 수정</Box>
       <Box>
         <Box>
           <FormControl>

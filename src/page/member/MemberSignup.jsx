@@ -146,7 +146,7 @@ export function MemberSignup() {
 
   return (
     <Box>
-      <Box>회원 가입</Box>
+      <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>회원 가입</Box>
       <Box>
         <Box>
           <FormControl>

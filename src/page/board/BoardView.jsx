@@ -76,7 +76,9 @@ export function BoardView() {
 
   return (
     <Box>
-      <Box>{board.id}번 게시물</Box>
+      <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>
+        {board.id}번 게시물
+      </Box>
       <Box>
         <FormControl>
           <FormLabel>제목</FormLabel>

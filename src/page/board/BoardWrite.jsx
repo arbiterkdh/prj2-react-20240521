@@ -60,7 +60,7 @@ export function BoardWrite() {
 
   return (
     <Box>
-      <Box>글 작성 화면</Box>
+      <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>글 작성 화면</Box>
       <Box>
         <FormControl>
           <FormLabel>제목</FormLabel>

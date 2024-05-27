@@ -95,7 +95,9 @@ export function MemberInfo() {
 
   return (
     <Box>
-      <Box>{member.id}번 회원 정보</Box>
+      <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>
+        {member.id}번 회원 정보
+      </Box>
       <Box>
         <Box>
           <FormControl>이메일</FormControl>

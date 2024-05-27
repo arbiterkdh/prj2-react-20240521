@@ -44,7 +44,7 @@ export function MemberLogin() {
 
   return (
     <Box>
-      <Box>로그인</Box>
+      <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>로그인</Box>
       <Box>
         <FormControl>
           <FormLabel>이메일</FormLabel>
