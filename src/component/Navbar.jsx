@@ -9,6 +9,7 @@ export function Navbar() {
   const navigate = useNavigate();
   const account = useContext(LoginContext);
   const toast = useToast();
+
   return (
     <Heading size={"lg"}>
       <Flex gap={3}>
