@@ -2,7 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { Box, Flex, Heading, Spacer, useToast } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCarrot, faShrimp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCarrot,
+  faHouse,
+  faPenToSquare,
+} from "@fortawesome/free-solid-svg-icons";
+import "./../App.css";
 import { LoginContext } from "./LoginProvider.jsx";
 
 export function Navbar() {
@@ -11,7 +16,7 @@ export function Navbar() {
   const toast = useToast();
 
   return (
-    <Heading size={"lg"}>
+    <Heading size={"lg"} m={2}>
       <Flex gap={3}>
         <Box
           onClick={() => navigate("/")}
@@ -22,8 +27,8 @@ export function Navbar() {
           }}
           mr={5}
         >
-          <FontAwesomeIcon icon={faShrimp} />
-          HOME
+          <FontAwesomeIcon icon={faHouse} />
+          동.com
         </Box>
         {account.isLoggedIn() && (
           <Box
@@ -31,7 +36,7 @@ export function Navbar() {
             cursor={"pointer"}
             _hover={{ color: "orange.400" }}
           >
-            글쓰기
+            <FontAwesomeIcon icon={faPenToSquare} />
           </Box>
         )}
 
