@@ -37,6 +37,15 @@ export function BoardList() {
       setBoardList(res.data.boardList);
       setPageInfo(res.data.pageInfo);
     });
+
+    const typeParam = searchParams.get("type");
+    const keywordParam = searchParams.get("keyword");
+    if (typeParam) {
+      setSearchType(typeParam);
+    }
+    if (keywordParam) {
+      setSearchKeyword(keywordParam);
+    }
   }, [searchParams]);
 
   const pageNumbers = [];
@@ -46,6 +55,11 @@ export function BoardList() {
 
   function handleSearchClick() {
     navigate(`/?type=${searchType}&keyword=${searchKeyword}`);
+  }
+
+  function handlePageButtonClick(pageNumber) {
+    searchParams.set("page", pageNumber);
+    navigate(`/?${searchParams}`);
   }
 
   return (
@@ -63,6 +77,13 @@ export function BoardList() {
             </Tr>
           </Thead>
           <Tbody>
+            {boardList.length === 0 && (
+              <Tr>
+                <Td>-</Td>
+                <Td>조회된 게시물이 없습니다.</Td>
+                <Td>-</Td>
+              </Tr>
+            )}
             {boardList.map((board) => (
               <Tr onClick={() => navigate(`/board/${board.id}`)} key={board.id}>
                 <Td>{board.id}</Td>
@@ -75,8 +96,11 @@ export function BoardList() {
       </Box>
       <Box>
         <Flex alignItems={"center"}>
-          <Box>
-            <Select onChange={(e) => setSearchType(e.target.value)}>
+          <Box mr={1}>
+            <Select
+              value={searchType}
+              onChange={(e) => setSearchType(e.target.value)}
+            >
               <option value={"all"}>전체</option>
               <option value={"text"}>글</option>
               <option value={"nick"}>작성자</option>
@@ -84,6 +108,7 @@ export function BoardList() {
           </Box>
           <Box>
             <Input
+              value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
               placeholder={"검색어"}
             />
@@ -104,7 +129,7 @@ export function BoardList() {
       >
         {pageInfo.currentPageNumber > 1 && (
           <Button
-            onClick={() => navigate(`/?page=1`)}
+            onClick={() => handlePageButtonClick(1)}
             sx={{ bgColor: "orange.300" }}
           >
             <FontAwesomeIcon icon={faBackwardFast} />
@@ -112,34 +137,32 @@ export function BoardList() {
         )}
         {pageInfo.currentPageNumber > 10 && (
           <Button
-            onClick={() => navigate(`/?page=${pageInfo.prevPageNumber}`)}
+            onClick={() => handlePageButtonClick(pageInfo.prevPageNumber)}
             sx={{ bgColor: "orange.300" }}
           >
             <FontAwesomeIcon icon={faPlay} rotation={180} />
           </Button>
         )}
-        {pageNumbers.map((pagenumber) => (
+        {pageNumbers.map((pageNumber) => (
           <Button
-            onClick={() => {
-              navigate(`/?page=${pagenumber}`);
-            }}
-            key={pagenumber}
+            onClick={() => handlePageButtonClick(pageNumber)}
+            key={pageNumber}
             sx={{
               bgColor:
-                pagenumber === pageInfo.currentPageNumber ? "" : "orange.300",
+                pageNumber === pageInfo.currentPageNumber ? "" : "orange.300",
               fontSize: "1.3rem",
               color:
-                pagenumber === pageInfo.currentPageNumber
+                pageNumber === pageInfo.currentPageNumber
                   ? "white"
                   : "orange.100",
             }}
           >
-            {pagenumber}
+            {pageNumber}
           </Button>
         ))}
         {pageInfo.rightPageNumber !== pageInfo.lastPageNumber && (
           <Button
-            onClick={() => navigate(`/?page=${pageInfo.nextPageNumber}`)}
+            onClick={() => handlePageButtonClick(pageInfo.nextPageNumber)}
             sx={{ bgColor: "orange.300" }}
           >
             <FontAwesomeIcon icon={faPlay} />
@@ -147,7 +170,7 @@ export function BoardList() {
         )}
         {pageInfo.currentPageNumber < pageInfo.lastPageNumber && (
           <Button
-            onClick={() => navigate(`/?page=${pageInfo.lastPageNumber}`)}
+            onClick={() => handlePageButtonClick(pageInfo.lastPageNumber)}
             sx={{ bgColor: "orange.300" }}
           >
             <FontAwesomeIcon icon={faForwardFast} />

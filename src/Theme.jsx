@@ -42,6 +42,22 @@ export const theme = extendTheme({
         variant: "custom",
       },
     },
+    Select: {
+      baseStyle: {
+        field: {
+          zIndex: 1,
+          borderColor: "orange",
+          boxShadow: "0 0 0 1px lightgray",
+          _focus: {
+            borderColor: "orange",
+            boxShadow: "0 0 0 2px orange",
+          },
+        },
+      },
+      defaultProps: {
+        variant: "custom",
+      },
+    },
     Textarea: {
       baseStyle: {
         zIndex: 1,
