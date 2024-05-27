@@ -1,4 +1,4 @@
-import { Box, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPen } from "@fortawesome/free-solid-svg-icons";
@@ -14,7 +14,7 @@ export function BoardList() {
     axios.get(`/api/board/list?${searchParams}`).then((res) => {
       setBoardList(res.data);
     });
-  }, []);
+  }, [searchParams]);
 
   // [{id: 5, title: "제목1", writer: "누구1"},
   // [{id: 5, title: "제목1", writer: "누구1"},
@@ -44,6 +44,18 @@ export function BoardList() {
             ))}
           </Tbody>
         </Table>
+      </Box>
+      <Box>
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((pagenumber) => (
+          <Button
+            onClick={() => {
+              navigate(`/?page=${pagenumber}`);
+            }}
+            key={pagenumber}
+          >
+            {pagenumber}
+          </Button>
+        ))}
       </Box>
     </Box>
   );
