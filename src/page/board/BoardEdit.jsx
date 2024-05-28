@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
+  Badge,
   Box,
   Button,
   Flex,
@@ -75,7 +76,20 @@ export function BoardEdit() {
 
   const fileNameList = [];
   for (let i = 0; i < addFileList.length; i++) {
-    fileNameList.push(<li key={i}>{addFileList[i].name}</li>);
+    // 이미 있는 파일과 중복된 파일명인지 확인
+    let duplicate = false;
+    for (let file of board.fileList) {
+      if (file.name === addFileList[i].name) {
+        duplicate = true;
+        break;
+      }
+    }
+    fileNameList.push(
+      <li key={i}>
+        {addFileList[i].name}
+        {duplicate && <Badge colorScheme={"red"}>override</Badge>}
+      </li>,
+    );
   }
 
   function handleRemoveSwitchChange(name, checked) {
