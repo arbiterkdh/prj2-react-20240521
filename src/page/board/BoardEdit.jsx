@@ -39,7 +39,12 @@ export function BoardEdit() {
 
   function handleClickSave() {
     axios
-      .put("/api/board/edit", board)
+      .putForm("/api/board/edit", {
+        id: board.id,
+        title: board.title,
+        content: board.content,
+        removeFileList,
+      })
       .then(() => {
         toast({
           status: "success",
