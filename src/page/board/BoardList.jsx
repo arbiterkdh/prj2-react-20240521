@@ -1,4 +1,5 @@
 import {
+  Badge,
   Box,
   Button,
   Center,
@@ -17,6 +18,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBackwardFast,
   faForwardFast,
+  faImages,
   faMagnifyingGlass,
   faPlay,
   faUserPen,
@@ -89,7 +91,15 @@ export function BoardList() {
             {boardList.map((board) => (
               <Tr onClick={() => navigate(`/board/${board.id}`)} key={board.id}>
                 <Td>{board.id}</Td>
-                <Td>{board.title}</Td>
+                <Td>
+                  {board.title}
+                  {board.numberOfImages && (
+                    <Badge>
+                      <FontAwesomeIcon icon={faImages} />
+                      {board.numberOfImages}
+                    </Badge>
+                  )}
+                </Td>
                 <Td>{board.writer}</Td>
               </Tr>
             ))}
