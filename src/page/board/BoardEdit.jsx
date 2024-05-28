@@ -4,6 +4,7 @@ import axios from "axios";
 import {
   Box,
   Button,
+  Flex,
   FormControl,
   FormLabel,
   Image,
@@ -15,14 +16,20 @@ import {
   ModalHeader,
   ModalOverlay,
   Spinner,
+  Switch,
+  Text,
   Textarea,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function BoardEdit() {
   const { id } = useParams();
   const [board, setBoard] = useState(null);
+  const [removeFileList, setRemoveFileList] = useState([]);
+
   const toast = useToast();
   const navigate = useNavigate();
   const { onClose, isOpen, onOpen } = useDisclosure();
@@ -59,6 +66,14 @@ export function BoardEdit() {
     return <Spinner />;
   }
 
+  function handleRemoveSwitchChange(name, checked) {
+    if (checked) {
+      setRemoveFileList([...removeFileList, name]);
+    } else {
+      setRemoveFileList(removeFileList.filter((item) => item !== name));
+    }
+  }
+
   return (
     <Box>
       <Box>{board.id}번 게시물 수정</Box>
@@ -80,10 +95,28 @@ export function BoardEdit() {
               onChange={(e) => setBoard({ ...board, content: e.target.value })}
             ></Textarea>
             <Box>
-              {board.files &&
-                board.files.map((file) => (
+              {board.fileList &&
+                board.fileList.map((file) => (
                   <Box key={file.name}>
-                    <Image src={file.src} />
+                    <Flex>
+                      <FontAwesomeIcon icon={faTrashCan} />
+                      <Switch
+                        onChange={(e) =>
+                          handleRemoveSwitchChange(file.name, e.target.checked)
+                        }
+                      />
+                      <Text>{file.name}</Text>
+                    </Flex>
+                    <Box>
+                      <Image
+                        sx={
+                          removeFileList.includes(file.name)
+                            ? { width: "0px", height: "0px" }
+                            : {}
+                        }
+                        src={file.src}
+                      />
+                    </Box>
                   </Box>
                 ))}
             </Box>
