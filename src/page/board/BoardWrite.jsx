@@ -18,6 +18,7 @@ export function BoardWrite() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
+  const [files, setFiles] = useState([]);
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -27,6 +28,12 @@ export function BoardWrite() {
     disableSaveButton = true;
   } else if (content.trim().length === 0) {
     disableSaveButton = true;
+  }
+
+  // file 목록 작성
+  const fileNameList = [];
+  for (let i = 0; i < files.length; i++) {
+    fileNameList.push(<li>{files[i].name}</li>);
   }
 
   function handleSaveClick() {
@@ -72,6 +79,22 @@ export function BoardWrite() {
           <FormLabel>본문</FormLabel>
           <Textarea onChange={(e) => setContent(e.target.value)} />
         </FormControl>
+      </Box>
+      <Box>
+        <FormControl>
+          <FormLabel>파일</FormLabel>
+          <Input
+            multiple
+            type={"file"}
+            accept={"image/*"}
+            onChange={(e) => {
+              setFiles(e.target.files);
+            }}
+          />
+        </FormControl>
+      </Box>
+      <Box>
+        <ul>{fileNameList}</ul>
       </Box>
       <Box>
         <FormControl>
