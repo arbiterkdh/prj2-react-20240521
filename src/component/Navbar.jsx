@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Box, Flex, Heading, Spacer, useToast } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCarrot,
@@ -14,6 +14,9 @@ export function Navbar() {
   const navigate = useNavigate();
   const account = useContext(LoginContext);
   const toast = useToast();
+  const [ani1, setAni1] = useState(0);
+  const [ani2, setAni2] = useState(0);
+  const [ani3, setAni3] = useState(0);
 
   return (
     <Heading size={"lg"} m={2}>
@@ -26,17 +29,22 @@ export function Navbar() {
             _hover: { color: "orange.400" },
           }}
           mr={5}
+          onMouseEnter={() => setAni1(1)}
+          onMouseLeave={() => setAni1(0)}
         >
-          <FontAwesomeIcon icon={faHouse} />
           동.com
+          {ani1 === 0 && <FontAwesomeIcon icon={faHouse} />}
+          {ani1 === 1 && <FontAwesomeIcon icon={faHouse} bounce />}
         </Box>
         {account.isLoggedIn() && (
           <Box
             onClick={() => navigate("/write")}
             cursor={"pointer"}
-            _hover={{ color: "orange.400" }}
+            onMouseEnter={() => setAni2(1)}
+            onMouseLeave={() => setAni2(0)}
           >
-            <FontAwesomeIcon icon={faPenToSquare} />
+            {ani2 === 0 && <FontAwesomeIcon icon={faPenToSquare} />}
+            {ani2 === 1 && <FontAwesomeIcon icon={faPenToSquare} beat />}
           </Box>
         )}
 
@@ -75,13 +83,25 @@ export function Navbar() {
             }}
             cursor={"pointer"}
             _hover={{ color: "orange.400" }}
+            onMouseEnter={() => setAni3(1)}
+            onMouseLeave={() => setAni3(0)}
           >
             {account.nickName} 님
-            <FontAwesomeIcon
-              icon={faCarrot}
-              color="#DD6B20"
-              style={{ marginLeft: "10px" }}
-            />
+            {ani3 === 0 && (
+              <FontAwesomeIcon
+                icon={faCarrot}
+                color="#DD6B20"
+                style={{ marginLeft: "10px" }}
+              />
+            )}
+            {ani3 === 1 && (
+              <FontAwesomeIcon
+                icon={faCarrot}
+                shake
+                color="#DD6B20"
+                style={{ marginLeft: "10px" }}
+              />
+            )}
           </Box>
         )}
         {account.isLoggedIn() && (

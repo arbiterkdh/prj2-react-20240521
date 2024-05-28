@@ -45,6 +45,11 @@ export const theme = extendTheme({
     Select: {
       baseStyle: {
         field: {
+          option: {
+            _hover: {
+              bg: "orange.300",
+            },
+          },
           zIndex: 1,
           borderColor: "orange",
           boxShadow: "0 0 0 1px lightgray",
