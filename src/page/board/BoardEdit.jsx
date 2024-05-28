@@ -1,10 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
   Box,
   Button,
   FormControl,
+  FormHelperText,
   FormLabel,
   Input,
   Modal,
@@ -22,6 +23,8 @@ import {
 export function BoardEdit() {
   const { id } = useParams();
   const [board, setBoard] = useState(null);
+  const [files, setFiles] = useState([]);
+
   const toast = useToast();
   const navigate = useNavigate();
   const { onClose, isOpen, onOpen } = useDisclosure();
@@ -58,6 +61,12 @@ export function BoardEdit() {
     return <Spinner />;
   }
 
+  const fileNameList = [];
+
+  for (let i = 0; i < fileNameList.length; i++) {
+    fileNameList.push(<li key={i}>{fileNameList[i].name}</li>);
+  }
+
   return (
     <Box>
       <Box>{board.id}번 게시물 수정</Box>
@@ -79,6 +88,23 @@ export function BoardEdit() {
               onChange={(e) => setBoard({ ...board, content: e.target.value })}
             ></Textarea>
           </FormControl>
+        </Box>
+        <Box>
+          <FormControl>
+            <FormLabel>파일</FormLabel>
+            <Input
+              multiple
+              type={"file"}
+              accept={"image/*"}
+              onChange={(e) => setFiles(e.target.files)}
+            />
+            <FormHelperText>
+              총 용량은 10MB, 파일 하나당 1MB 를 초과할 수 없습니다.
+            </FormHelperText>
+          </FormControl>
+        </Box>
+        <Box>
+          <ul>{fileNameList}</ul>
         </Box>
         <Box>
           <FormControl>
