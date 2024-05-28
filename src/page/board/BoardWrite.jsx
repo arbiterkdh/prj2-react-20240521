@@ -39,9 +39,10 @@ export function BoardWrite() {
   function handleSaveClick() {
     setLoading(true);
     axios
-      .post("api/board/add", {
+      .postForm("api/board/add", {
         title,
         content,
+        files,
       })
       .then(() => {
         toast({
