@@ -16,6 +16,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spacer,
   Spinner,
   Textarea,
   useDisclosure,
@@ -31,7 +32,10 @@ export function BoardView() {
 
   const { id } = useParams();
   const [board, setBoard] = useState(null);
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState({
+    like: false,
+    count: 0,
+  });
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -88,15 +92,17 @@ export function BoardView() {
         <Heading sx={{ padding: "10px", fontSize: "1.5rem" }}>
           {board.id}번 게시물
         </Heading>
+        <Spacer />
         <Box
           color={"blue.400"}
-          onClick={() => setLike(!like)}
+          onClick={() => setLike({ ...like, like: !like.like })}
           fontSize={"3xl"}
           cursor={"pointer"}
         >
-          {like && <FontAwesomeIcon icon={fullyThumbsUp} />}
-          {like || <FontAwesomeIcon icon={emptyThumbsUp} />}
+          {like.like && <FontAwesomeIcon icon={fullyThumbsUp} />}
+          {like.like || <FontAwesomeIcon icon={emptyThumbsUp} />}
         </Box>
+        <Box fontSize={"3xl"}>{like.count}</Box>
       </Flex>
       <Box>
         <FormControl>
