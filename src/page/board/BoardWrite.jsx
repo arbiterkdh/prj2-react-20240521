@@ -73,7 +73,7 @@ export function BoardWrite() {
       <Box>
         <FormControl>
           <FormLabel>제목</FormLabel>
-          <Input onChange={(e) => setTitle(e.target.value)} />
+          <Input onChange={(e) => setTitle(e.target.value.trim())} />
         </FormControl>
       </Box>
       <Box>

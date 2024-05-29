@@ -37,7 +37,7 @@ export function BoardEdit() {
   const navigate = useNavigate();
   const { onClose, isOpen, onOpen } = useDisclosure();
   useEffect(() => {
-    axios.get(`/api/board/${id}`).then((res) => setBoard(res.data));
+    axios.get(`/api/board/${id}`).then((res) => setBoard(res.data.board));
   }, []);
 
   function handleClickSave() {
@@ -110,7 +110,9 @@ export function BoardEdit() {
             <FormLabel>제목</FormLabel>
             <Input
               defaultValue={board.title}
-              onChange={(e) => setBoard({ ...board, title: e.target.value })}
+              onChange={(e) =>
+                setBoard({ ...board, title: e.target.value.trim() })
+              }
             />
           </FormControl>
         </Box>
