@@ -46,7 +46,8 @@ export function BoardView() {
     axios
       .get(`/api/board/${id}`)
       .then((res) => {
-        setBoard(res.data);
+        setBoard(res.data.board);
+        setLike(res.data.like);
       })
       .catch((err) => {
         if (err.response.status === 404) {
