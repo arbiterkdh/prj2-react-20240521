@@ -86,6 +86,16 @@ export function BoardView() {
     return <Spinner />;
   }
 
+  function handleClickLike() {
+    axios
+      .put(`/api/board/like`, { boardId: board.id })
+      .then((res) => {
+        setLike(res.data);
+      })
+      .catch(() => {})
+      .finally(() => {});
+  }
+
   return (
     <Box>
       <Flex>
@@ -95,7 +105,7 @@ export function BoardView() {
         <Spacer />
         <Box
           color={"blue.400"}
-          onClick={() => setLike({ ...like, like: !like.like })}
+          onClick={handleClickLike}
           fontSize={"3xl"}
           cursor={"pointer"}
         >
