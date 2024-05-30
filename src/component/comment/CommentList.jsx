@@ -13,24 +13,24 @@ export function CommentList({ boardId }) {
       })
       .catch(() => {})
       .finally(() => {});
-  }, []);
+  }, [commentList]);
   if (commentList.length === 0) {
     return <Box>댓글이 없습니다. 첫 댓글을 작성해보세요.</Box>;
   }
   return (
     <Box>
-      {commentList.map((comment) => {
-        <Box key={comment.id}>
+      {commentList.map((comment) => (
+        <Box key={comment.id} m={3} bgColor="orange.100">
           <Flex>
             <Box>
-              <Box>{comment.memberId}</Box>
+              <Box>{comment.memberId}님</Box>
               <Spacer />
               <Box>{comment.inserted}</Box>
             </Box>
           </Flex>
           <Box>{comment.comment}</Box>
-        </Box>;
-      })}
+        </Box>
+      ))}
     </Box>
   );
 }
