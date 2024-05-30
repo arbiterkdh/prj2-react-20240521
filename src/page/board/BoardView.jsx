@@ -95,7 +95,15 @@ export function BoardView() {
       .then((res) => {
         setLike(res.data);
       })
-      .catch((err) => {})
+      .catch((err) => {
+        if (err.response.status === 401) {
+          toast({
+            status: "warning",
+            description: "로그인이 필요한 서비스입니다.",
+            position: "bottom-right",
+          });
+        }
+      })
       .finally(() => {
         setIsLikeProcessing(false);
       });
@@ -111,8 +119,8 @@ export function BoardView() {
         {isLikeProcessing || (
           <Flex>
             <Box
-              color={"blue.400"}
               onClick={handleClickLike}
+              color={"blue.400"}
               fontSize={"3xl"}
               cursor={"pointer"}
             >

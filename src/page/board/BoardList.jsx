@@ -75,6 +75,7 @@ export function BoardList() {
             <Tr>
               <Th>#</Th>
               <Th>TITLE</Th>
+              <Th>LIKE</Th>
               <Th>
                 <FontAwesomeIcon icon={faUserPen} />
               </Th>
@@ -85,6 +86,7 @@ export function BoardList() {
               <Tr>
                 <Td>-</Td>
                 <Td>조회된 게시물이 없습니다.</Td>
+                <Td>-</Td>
                 <Td>-</Td>
               </Tr>
             )}
@@ -100,6 +102,7 @@ export function BoardList() {
                     </Badge>
                   )}
                 </Td>
+                <Td>{board.numberOfLike > 0 && board.numberOfLike}</Td>
                 <Td>{board.writer}</Td>
               </Tr>
             ))}
