@@ -20,10 +20,13 @@ import {
   faForwardFast,
   faMagnifyingGlass,
   faPlay,
-  faThumbsUp,
   faUserPen,
 } from "@fortawesome/free-solid-svg-icons";
-import { faComments, faImages } from "@fortawesome/free-regular-svg-icons";
+import {
+  faComments,
+  faImages,
+  faThumbsUp,
+} from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -77,11 +80,9 @@ export function BoardList() {
               <Th>#</Th>
               <Th>TITLE</Th>
               <Th>
-                <FontAwesomeIcon icon={faThumbsUp} />
-              </Th>
-              <Th>
                 <FontAwesomeIcon icon={faUserPen} />
               </Th>
+              <Th>조회수</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -98,20 +99,26 @@ export function BoardList() {
                 <Td>{board.id}</Td>
                 <Td>
                   {board.title}
+                  {board.numberOfImages > 0 && (
+                    <Badge mr={1}>
+                      <FontAwesomeIcon icon={faImages} />+{board.numberOfImages}
+                    </Badge>
+                  )}
                   {board.numberOfComments > 0 && (
                     <Badge mr={1}>
                       <FontAwesomeIcon icon={faComments} />
                       {board.numberOfComments}
                     </Badge>
                   )}
-                  {board.numberOfImages > 0 && (
+                  {board.numberOfLike > 0 && (
                     <Badge>
-                      <FontAwesomeIcon icon={faImages} />+{board.numberOfImages}
+                      <FontAwesomeIcon icon={faThumbsUp} />
+                      {board.numberOfLike}
                     </Badge>
                   )}
                 </Td>
-                <Td>{board.numberOfLike > 0 && board.numberOfLike}</Td>
                 <Td>{board.writer}</Td>
+                <Td>{board.views}</Td>
               </Tr>
             ))}
           </Tbody>

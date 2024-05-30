@@ -150,13 +150,13 @@ export function BoardView() {
       <Box>
         <FormControl>
           <FormLabel>제목</FormLabel>
-          <Input value={board.title} readOnly />
+          <Input value={board.title} variant={"noBorder"} readOnly />
         </FormControl>
       </Box>
       <Box>
         <FormControl>
           <FormLabel>본문</FormLabel>
-          <Textarea value={board.content} readOnly />
+          <Textarea value={board.content} variant={"noBorder"} readOnly />
         </FormControl>
       </Box>
       <Box>
@@ -170,27 +170,49 @@ export function BoardView() {
       <Box>
         <FormControl>
           <FormLabel>작성자</FormLabel>
-          <Input value={board.writer} readOnly />
+          <Input value={board.writer} variant={"noBorder"} readOnly />
         </FormControl>
       </Box>
       <Box>
-        <FormControl>작성일시</FormControl>
-        <Input type={"datetime-local"} value={board.inserted} readOnly />
+        <FormControl>
+          <FormLabel>작성일시</FormLabel>
+        </FormControl>
+        <Input
+          type={"datetime-local"}
+          value={board.inserted}
+          variant={"noBorder"}
+          readOnly
+        />
       </Box>
-      {account.hasAccess(board.memberId) && (
+      <Box>
+        <FormControl>
+          <FormLabel>조회수</FormLabel>
+        </FormControl>
+        <Input value={board.views} readOnly variant={"noBorder"} />
+      </Box>
+      <Flex justifyContent="space-between">
         <Box>
-          <Button
-            colorScheme={"purple"}
-            onClick={() => navigate(`/edit/${board.id}`)}
-            mr={1}
-          >
-            수정
-          </Button>
-          <Button colorScheme={"red"} onClick={onOpen}>
-            삭제
-          </Button>
+          <Flex>
+            <Button>이전 글</Button>
+            <Button>목록</Button>
+            <Button>다음 글</Button>
+          </Flex>
         </Box>
-      )}
+        {account.hasAccess(board.memberId) && (
+          <Box>
+            <Button
+              colorScheme={"purple"}
+              onClick={() => navigate(`/edit/${board.id}`)}
+              mr={1}
+            >
+              수정
+            </Button>
+            <Button colorScheme={"red"} onClick={onOpen}>
+              삭제
+            </Button>
+          </Box>
+        )}
+      </Flex>
 
       <CommentComponent boardId={board.id} />
 

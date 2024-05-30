@@ -38,6 +38,21 @@ export const theme = extendTheme({
           },
         },
       },
+      variants: {
+        noBorder: {
+          field: {
+            border: "none",
+            boxShadow: "none",
+            _hover: {
+              border: "none",
+            },
+            _focus: {
+              border: "none",
+              boxShadow: "none",
+            },
+          },
+        },
+      },
       defaultProps: {
         variant: "custom",
       },
@@ -74,6 +89,22 @@ export const theme = extendTheme({
           boxShadow: "0 0 0 2px orange",
         },
       },
+      variants: {
+        noBorder: {
+          bgColor: "orange.50",
+          margin: "5px",
+          height: "400px",
+          border: "none",
+          boxShadow: "none",
+          _hover: {
+            border: "none",
+          },
+          _focus: {
+            border: "none",
+            boxShadow: "none",
+          },
+        },
+      },
       defaultProps: {
         variant: "custom",
       },
@@ -107,6 +138,11 @@ export const theme = extendTheme({
         borderRadius: "md",
         border: "1px solid",
         borderColor: "orange.200",
+      },
+    },
+    FormLabel: {
+      baseStyle: {
+        margin: "5px",
       },
     },
     Heading: {
