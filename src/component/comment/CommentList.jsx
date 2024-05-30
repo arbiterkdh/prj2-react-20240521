@@ -22,10 +22,10 @@ export function CommentList({ boardId, isSending }) {
   return (
     <Box>
       {commentList.map((comment) => (
-        <Box key={comment.id}>
+        <Box key={comment.id} bgColor={"orange.100"} m={1}>
           <Flex>
             <Box>
-              <Box>{comment.memberId}</Box>
+              <Box>{comment.nickName}</Box>
               <Spacer />
               <Box>{comment.inserted}</Box>
             </Box>
