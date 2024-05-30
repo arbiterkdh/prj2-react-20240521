@@ -4,12 +4,10 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane as solidPlane } from "@fortawesome/free-solid-svg-icons";
 import { faPaperPlane as emptyPlane } from "@fortawesome/free-regular-svg-icons";
-import { useNavigate } from "react-router-dom";
 
 export function CommentWrite({ boardId, isSending, setIsSending }) {
   const [comment, setComment] = useState("");
   const [mouse, setMouse] = useState(0);
-  const navigate = useNavigate();
   const toast = useToast();
 
   function handleCommentSubmitClick() {
@@ -26,7 +24,6 @@ export function CommentWrite({ boardId, isSending, setIsSending }) {
           description: "댓글이 등록되었습니다.",
           position: "bottom-right",
         });
-        navigate(`/board/${boardId}`);
       })
       .catch(() => {})
       .finally(() => {
