@@ -13,7 +13,7 @@ export function CommentList({ boardId }) {
       })
       .catch(() => {})
       .finally(() => {});
-  }, [commentList]);
+  }, []);
   if (commentList.length === 0) {
     return <Box>댓글이 없습니다. 첫 댓글을 작성해보세요.</Box>;
   }

@@ -8,6 +8,7 @@ import { faPaperPlane as emptyPlane } from "@fortawesome/free-regular-svg-icons"
 export function CommentWrite({ boardId }) {
   const [comment, setComment] = useState("");
   const [mouse, setMouse] = useState(0);
+
   function handleCommentSubmitClick() {
     axios
       .post("/api/comment/add", {
