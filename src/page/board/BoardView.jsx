@@ -26,6 +26,7 @@ import { LoginContext } from "../../component/LoginProvider.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp as fullyThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp as emptyThumbsUp } from "@fortawesome/free-regular-svg-icons/faThumbsUp";
+import { CommentComponent } from "../../component/CommentComponent.jsx";
 
 export function BoardView() {
   const account = useContext(LoginContext);
@@ -180,6 +181,8 @@ export function BoardView() {
           </Button>
         </Box>
       )}
+
+      <CommentComponent boardId={board.id} />
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

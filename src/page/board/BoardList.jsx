@@ -21,6 +21,7 @@ import {
   faImages,
   faMagnifyingGlass,
   faPlay,
+  faThumbsUp,
   faUserPen,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
@@ -75,7 +76,9 @@ export function BoardList() {
             <Tr>
               <Th>#</Th>
               <Th>TITLE</Th>
-              <Th>LIKE</Th>
+              <Th>
+                <FontAwesomeIcon icon={faThumbsUp} />
+              </Th>
               <Th>
                 <FontAwesomeIcon icon={faUserPen} />
               </Th>
