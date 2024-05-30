@@ -98,10 +98,12 @@ export function BoardList() {
                 <Td>{board.id}</Td>
                 <Td>
                   {board.title}
+                  {board.numberOfComments > 0 && (
+                    <Badge mr={1}>+{board.numberOfComments}</Badge>
+                  )}
                   {board.numberOfImages > 0 && (
                     <Badge>
-                      <FontAwesomeIcon icon={faImages} />
-                      {board.numberOfImages}
+                      <FontAwesomeIcon icon={faImages} />+{board.numberOfImages}
                     </Badge>
                   )}
                 </Td>
