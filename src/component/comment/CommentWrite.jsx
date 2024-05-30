@@ -5,10 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane as solidPlane } from "@fortawesome/free-solid-svg-icons";
 import { faPaperPlane as emptyPlane } from "@fortawesome/free-regular-svg-icons";
 
-export function CommentWrite({ boardId }) {
+export function CommentWrite({ boardId, isSending, setIsSending }) {
   const [comment, setComment] = useState("");
   const [mouse, setMouse] = useState(0);
+
   function handleCommentSubmitClick() {
+    setIsSending(true);
     axios
       .post("/api/comment/add", {
         boardId,
@@ -16,7 +18,9 @@ export function CommentWrite({ boardId }) {
       })
       .then((res) => {})
       .catch(() => {})
-      .finally(() => {});
+      .finally(() => {
+        setIsSending(false);
+      });
   }
 
   return (
@@ -27,6 +31,7 @@ export function CommentWrite({ boardId }) {
         onChange={(e) => setComment(e.target.value)}
       />
       <Button
+        isLoading={isSending}
         onClick={handleCommentSubmitClick}
         onMouseEnter={() => setMouse(1)}
         onMouseLeave={() => setMouse(0)}
