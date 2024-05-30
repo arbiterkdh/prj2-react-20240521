@@ -15,10 +15,14 @@ import {
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import { useContext } from "react";
+import { LoginContext } from "../LoginProvider.jsx";
 
 export function CommentItem({ comment, isRemoved, setIsRemoved }) {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const account = useContext(LoginContext);
+
   function handleRemoveClick() {
     setIsRemoved(true);
     axios
@@ -49,9 +53,11 @@ export function CommentItem({ comment, isRemoved, setIsRemoved }) {
         <Box>{comment.comment}</Box>
         <Spacer />
         <Box>
-          <Button onClick={onOpen}>
-            <FontAwesomeIcon icon={faTrashCan} />
-          </Button>
+          {account.hasAccess(comment.memberId) && (
+            <Button onClick={onOpen}>
+              <FontAwesomeIcon icon={faTrashCan} />
+            </Button>
+          )}
         </Box>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose}>
