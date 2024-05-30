@@ -94,11 +94,16 @@ export function BoardList() {
                 <Td>
                   {board.title}
                   {board.numberOfImages > 0 && (
-                    <Badge>
+                    <Badge colorScheme={"orange"}>
                       <FontAwesomeIcon icon={faImages} />
                       {board.numberOfImages}
                     </Badge>
                   )}
+                  {
+                    <Badge ml={1} colorScheme={"blue"}>
+                      like{likeCount}
+                    </Badge>
+                  }
                 </Td>
                 <Td>{board.writer}</Td>
               </Tr>
