@@ -33,6 +33,7 @@ export function CommentWrite({ boardId, isSending, setIsSending }) {
 
   return (
     <Box>
+      <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>댓글 입력</Box>
       <Textarea
         placeholder={"댓글을 작성해 보세요."}
         value={comment}

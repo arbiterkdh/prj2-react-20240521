@@ -12,13 +12,15 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { faTrashCan as emptyCan } from "@fortawesome/free-regular-svg-icons";
+import { faTrashCan as solidCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LoginContext } from "../LoginProvider.jsx";
 
 export function CommentItem({ comment, isRemoved, setIsRemoved }) {
+  const [mouse, setMouse] = useState(0);
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const account = useContext(LoginContext);
@@ -43,19 +45,24 @@ export function CommentItem({ comment, isRemoved, setIsRemoved }) {
   }
 
   return (
-    <Box bgColor={"orange.100"} m={1}>
+    <Box bgColor={"orange.100"} m={1} h={40}>
       <Flex>
-        <Box>{comment.nickName}</Box>
+        <Box>{comment.nickName} 님</Box>
         <Spacer />
-        <Box>{comment.inserted}</Box>
+        <Box>작성일시: {comment.inserted}</Box>
       </Flex>
       <Flex>
         <Box>{comment.comment}</Box>
         <Spacer />
         <Box>
           {account.hasAccess(comment.memberId) && (
-            <Button onClick={onOpen}>
-              <FontAwesomeIcon icon={faTrashCan} />
+            <Button
+              onClick={onOpen}
+              onMouseEnter={() => setMouse(1)}
+              onMouseLeave={() => setMouse(0)}
+            >
+              {mouse === 0 && <FontAwesomeIcon icon={emptyCan} />}
+              {mouse === 1 && <FontAwesomeIcon icon={solidCan} />}
             </Button>
           )}
         </Box>

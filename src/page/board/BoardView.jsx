@@ -118,7 +118,7 @@ export function BoardView() {
     <Box>
       <Flex>
         <Heading sx={{ padding: "10px", fontSize: "1.5rem" }}>
-          {board.id}번 게시물
+          <Box>{board.id}번 게시물</Box>
         </Heading>
         <Spacer />
         {isLikeProcessing || (

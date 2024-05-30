@@ -68,6 +68,7 @@ export const theme = extendTheme({
         zIndex: 1,
         borderColor: "orange",
         boxShadow: "0 0 0 1px lightgray",
+        resize: "none",
         _focus: {
           borderColor: "orange",
           boxShadow: "0 0 0 2px orange",
