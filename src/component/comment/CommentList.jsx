@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Heading, Spacer } from "@chakra-ui/react";
 
 export function CommentList({ boardId, isSending }) {
   const [commentList, setCommentList] = useState([]);
@@ -21,6 +21,12 @@ export function CommentList({ boardId, isSending }) {
   }
   return (
     <Box>
+      <Heading sx={{ padding: "10px", fontSize: "1.5rem" }}>
+        <Flex>
+          <Box mr={2}>댓글</Box>
+          {commentList.length > 0 && <Box>{commentList.length}개</Box>}
+        </Flex>
+      </Heading>
       {commentList.map((comment) => (
         <Box key={comment.id} bgColor={"orange.100"} m={1}>
           <Flex>
