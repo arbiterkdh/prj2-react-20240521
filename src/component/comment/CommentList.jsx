@@ -19,7 +19,7 @@ export function CommentList({ boardId }) {
   }
   return (
     <Box>
-      {commentList.map((comment) => {
+      {commentList.map((comment) => (
         <Box key={comment.id}>
           <Flex>
             <Box>
@@ -29,8 +29,8 @@ export function CommentList({ boardId }) {
             </Box>
           </Flex>
           <Box>{comment.comment}</Box>
-        </Box>;
-      })}
+        </Box>
+      ))}
     </Box>
   );
 }
