@@ -165,14 +165,12 @@ export function CommentItem({
         <ModalContent>
           <ModalHeader></ModalHeader>
           {deleteComment && <ModalBody>댓글을 지우시겠습니까?</ModalBody>}
-          {modify && <ModalBody>댓글을 수정하시겠습니까?</ModalBody>}
+          {modify && <ModalBody>이대로 수정하시겠습니까?</ModalBody>}
           <ModalFooter>
             <Button
               onClick={() => {
-                onClose();
                 setDeleteComment(false);
-                setModify(false);
-                setCommentText(comment.comment);
+                onClose();
               }}
             >
               취소
