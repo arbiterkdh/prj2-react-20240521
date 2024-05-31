@@ -13,10 +13,14 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import { faTrashCan as emptyCan } from "@fortawesome/free-regular-svg-icons";
 import {
-  faPenToSquare,
+  faPenToSquare as emptyPen,
+  faTrashCan as emptyCan,
+} from "@fortawesome/free-regular-svg-icons";
+import {
+  faPenToSquare as solidPen,
   faTrashCan as solidCan,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -34,6 +38,7 @@ export function CommentItem({
   const [modify, setModify] = useState(false);
   const [deleteComment, setDeleteComment] = useState(false);
   const [commentText, setCommentText] = useState(comment.comment);
+  const [mouse2, setMouse2] = useState(0);
 
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -122,20 +127,35 @@ export function CommentItem({
                         setModify(true);
                       }
                 }
+                onMouseEnter={() => setMouse2(1)}
+                onMouseLeave={() => setMouse2(0)}
               >
-                <FontAwesomeIcon icon={faPenToSquare} />
+                {mouse2 === 0 && <FontAwesomeIcon icon={emptyPen} />}
+                {mouse2 === 1 && <FontAwesomeIcon icon={solidPen} />}
               </Button>
-              <Button
-                onClick={() => {
-                  setDeleteComment(true);
-                  onOpen();
-                }}
-                onMouseEnter={() => setMouse(1)}
-                onMouseLeave={() => setMouse(0)}
-              >
-                {mouse === 0 && <FontAwesomeIcon icon={emptyCan} />}
-                {mouse === 1 && <FontAwesomeIcon icon={solidCan} />}
-              </Button>
+              {modify || (
+                <Button
+                  onClick={() => {
+                    setDeleteComment(true);
+                    onOpen();
+                  }}
+                  onMouseEnter={() => setMouse(1)}
+                  onMouseLeave={() => setMouse(0)}
+                >
+                  {mouse === 0 && <FontAwesomeIcon icon={emptyCan} />}
+                  {mouse === 1 && <FontAwesomeIcon icon={solidCan} />}
+                </Button>
+              )}
+              {modify && (
+                <Button
+                  onClick={() => {
+                    setModify(false);
+                    setCommentText(comment.comment);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faXmark} />
+                </Button>
+              )}
             </Box>
           )}
         </Box>
@@ -152,6 +172,7 @@ export function CommentItem({
                 onClose();
                 setDeleteComment(false);
                 setModify(false);
+                setCommentText(comment.comment);
               }}
             >
               취소

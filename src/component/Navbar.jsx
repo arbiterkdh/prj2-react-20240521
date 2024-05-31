@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCarrot,
   faHouse,
-  faPenToSquare,
+  faPenToSquare as solidPen,
 } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare as emptyPen } from "@fortawesome/free-regular-svg-icons";
 import "./../App.css";
 import { LoginContext } from "./LoginProvider.jsx";
 
@@ -43,8 +44,8 @@ export function Navbar() {
             onMouseEnter={() => setAni2(1)}
             onMouseLeave={() => setAni2(0)}
           >
-            {ani2 === 0 && <FontAwesomeIcon icon={faPenToSquare} />}
-            {ani2 === 1 && <FontAwesomeIcon icon={faPenToSquare} beat />}
+            {ani2 === 0 && <FontAwesomeIcon icon={emptyPen} />}
+            {ani2 === 1 && <FontAwesomeIcon icon={solidPen} beat />}
           </Box>
         )}
 
