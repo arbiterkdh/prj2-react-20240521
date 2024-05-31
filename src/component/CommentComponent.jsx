@@ -6,7 +6,8 @@ import { LoginContext } from "./LoginProvider.jsx";
 
 export function CommentComponent({ boardId }) {
   const [isSending, setIsSending] = useState(false);
-  const [isRemoved, setIsRemoved] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
+  const [isModifying, setIsModifying] = useState(false);
   const account = useContext(LoginContext);
 
   return (
@@ -21,8 +22,10 @@ export function CommentComponent({ boardId }) {
       <CommentList
         boardId={boardId}
         isSending={isSending}
-        isRemoved={isRemoved}
-        setIsRemoved={setIsRemoved}
+        isRemoving={isRemoving}
+        setIsRemoving={setIsRemoving}
+        isModifying={isModifying}
+        setIsModifying={setIsModifying}
       />
     </Box>
   );

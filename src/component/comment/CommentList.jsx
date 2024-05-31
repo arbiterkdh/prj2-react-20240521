@@ -3,7 +3,14 @@ import axios from "axios";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { CommentItem } from "./CommentItem.jsx";
 
-export function CommentList({ boardId, isSending, isRemoved, setIsRemoved }) {
+export function CommentList({
+  boardId,
+  isSending,
+  isRemoving,
+  setIsRemoving,
+  isModifying,
+  setIsModifying,
+}) {
   const [commentList, setCommentList] = useState([]);
 
   useEffect(() => {
@@ -16,7 +23,7 @@ export function CommentList({ boardId, isSending, isRemoved, setIsRemoved }) {
         .catch(() => {})
         .finally(() => {});
     }
-  }, [isSending, isRemoved]);
+  }, [isSending, isRemoving, isModifying]);
   if (commentList.length === 0) {
     return <Box>댓글이 없습니다. 첫 댓글을 작성해보세요.</Box>;
   }
@@ -32,8 +39,10 @@ export function CommentList({ boardId, isSending, isRemoved, setIsRemoved }) {
         <CommentItem
           comment={comment}
           key={comment.id}
-          isRemoved={isRemoved}
-          setIsRemoved={setIsRemoved}
+          isRemoving={isRemoving}
+          setIsRemoving={setIsRemoving}
+          isModifying={isModifying}
+          setIsModifying={setIsModifying}
         />
       ))}
     </Box>
