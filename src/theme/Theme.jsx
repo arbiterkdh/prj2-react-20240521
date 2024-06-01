@@ -146,7 +146,7 @@ export const customTheme = extendTheme({
       },
       variants: {
         noBorder: {
-          bgColor: "orange.50",
+          bgColor: "orange.100",
           margin: "5px",
           width: "99%",
           height: "400px",
