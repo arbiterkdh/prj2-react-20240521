@@ -100,7 +100,7 @@ export function CommentItem({
   }
 
   return (
-    <Box bgColor={"orange.100"} m={1} h={40}>
+    <Box m={1} h={40}>
       <Flex>
         <Box>{comment.nickName} 님</Box>
         <Spacer />

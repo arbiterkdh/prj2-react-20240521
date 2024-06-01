@@ -150,25 +150,15 @@ export function BoardList() {
           </Box>
         </Flex>
       </Box>
-      <Center
-        sx={{
-          marginTop: "20px",
-          bgColor: "orange.300",
-          height: "80px",
-        }}
-      >
+      <Center>
         {pageInfo.currentPageNumber > 1 && (
-          <Button
-            onClick={() => handlePageButtonClick(1)}
-            sx={{ bgColor: "orange.300" }}
-          >
+          <Button onClick={() => handlePageButtonClick(1)}>
             <FontAwesomeIcon icon={faBackwardFast} />
           </Button>
         )}
         {pageInfo.currentPageNumber > 10 && (
           <Button
             onClick={() => handlePageButtonClick(pageInfo.prevPageNumber)}
-            sx={{ bgColor: "orange.300" }}
           >
             <FontAwesomeIcon icon={faPlay} rotation={180} />
           </Button>
@@ -177,15 +167,6 @@ export function BoardList() {
           <Button
             onClick={() => handlePageButtonClick(pageNumber)}
             key={pageNumber}
-            sx={{
-              bgColor:
-                pageNumber === pageInfo.currentPageNumber ? "" : "orange.300",
-              fontSize: "1.3rem",
-              color:
-                pageNumber === pageInfo.currentPageNumber
-                  ? "white"
-                  : "orange.100",
-            }}
           >
             {pageNumber}
           </Button>
@@ -193,7 +174,6 @@ export function BoardList() {
         {pageInfo.rightPageNumber !== pageInfo.lastPageNumber && (
           <Button
             onClick={() => handlePageButtonClick(pageInfo.nextPageNumber)}
-            sx={{ bgColor: "orange.300" }}
           >
             <FontAwesomeIcon icon={faPlay} />
           </Button>
@@ -201,7 +181,6 @@ export function BoardList() {
         {pageInfo.currentPageNumber < pageInfo.lastPageNumber && (
           <Button
             onClick={() => handlePageButtonClick(pageInfo.lastPageNumber)}
-            sx={{ bgColor: "orange.300" }}
           >
             <FontAwesomeIcon icon={faForwardFast} />
           </Button>

@@ -151,7 +151,7 @@ export function MemberSignup() {
         <Box>
           <FormControl>
             <FormLabel>이메일</FormLabel>
-            <InputGroup>
+            <InputGroup variant={"custom"}>
               <Input
                 type={"email"}
                 onChange={(e) => {

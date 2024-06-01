@@ -1,6 +1,18 @@
 import { extendTheme } from "@chakra-ui/react";
 
 export const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        bg: "orange.50",
+        color: "#652B19",
+        _dark: {
+          bg: "whiteAlpha.100",
+          color: "RGBA(255, 255, 255, 0.80)",
+        },
+      },
+    },
+  },
   components: {
     Table: {
       baseStyle: {
@@ -13,10 +25,19 @@ export const theme = extendTheme({
               bg: "orange.300",
               color: "orange.100",
               fontSize: "1.2rem",
+              _dark: {
+                bg: "blue.900",
+                color: "RGBA(255, 255, 255, 0.80)",
+              },
             },
           },
           tbody: {
             tr: {
+              _dark: {
+                _hover: {
+                  bg: "blue.800",
+                },
+              },
               cursor: "pointer",
               _hover: {
                 bg: "orange.100",
@@ -29,12 +50,23 @@ export const theme = extendTheme({
     Input: {
       baseStyle: {
         field: {
+          width: "100%",
           zIndex: 1,
+          margin: "5px",
           borderColor: "orange",
           boxShadow: "0 0 0 1px lightgray",
           _focus: {
             borderColor: "orange",
             boxShadow: "0 0 0 2px orange",
+          },
+          _dark: {
+            bg: "whiteAlpha.50",
+            borderColor: "gray",
+            boxShadow: "0 0 0 1px gray",
+            _focus: {
+              borderColor: "gray",
+              boxShadow: "0 0 0 2px gray",
+            },
           },
         },
       },
@@ -50,6 +82,17 @@ export const theme = extendTheme({
               border: "none",
               boxShadow: "none",
             },
+            _dark: {
+              border: "none",
+              boxShadow: "none",
+              _hover: {
+                border: "none",
+              },
+              _focus: {
+                border: "none",
+                boxShadow: "none",
+              },
+            },
           },
         },
       },
@@ -60,17 +103,18 @@ export const theme = extendTheme({
     Select: {
       baseStyle: {
         field: {
-          option: {
-            _hover: {
-              bg: "orange.300",
-            },
-          },
           zIndex: 1,
           borderColor: "orange",
           boxShadow: "0 0 0 1px lightgray",
           _focus: {
             borderColor: "orange",
             boxShadow: "0 0 0 2px orange",
+          },
+          _dark: {
+            _focus: {
+              borderColor: "darkgray",
+              boxShadow: "0 0 0 2px darkgray",
+            },
           },
         },
       },
@@ -80,6 +124,8 @@ export const theme = extendTheme({
     },
     Textarea: {
       baseStyle: {
+        margin: "5px",
+        width: "30%",
         zIndex: 1,
         borderColor: "orange",
         boxShadow: "0 0 0 1px lightgray",
@@ -88,11 +134,19 @@ export const theme = extendTheme({
           borderColor: "orange",
           boxShadow: "0 0 0 2px orange",
         },
+        _dark: {
+          bg: "whiteAlpha.50",
+          _focus: {
+            borderColor: "gray",
+            boxShadow: "0 0 0 2px gray",
+          },
+        },
       },
       variants: {
         noBorder: {
           bgColor: "orange.50",
           margin: "5px",
+          width: "99%",
           height: "400px",
           border: "none",
           boxShadow: "none",
@@ -102,6 +156,13 @@ export const theme = extendTheme({
           _focus: {
             border: "none",
             boxShadow: "none",
+          },
+          _dark: {
+            bg: "whiteAlpha.50",
+            _focus: {
+              borderColor: "none",
+              boxShadow: "none",
+            },
           },
         },
       },
@@ -124,20 +185,19 @@ export const theme = extendTheme({
           },
           _disabled: {
             bg: "orange.300",
-            cursor: "not-allowed",
+            cursor: "default",
             _hover: {
               bg: "orange.400", // disabled 상태일 때 hover 시 배경 색상
             },
           },
+          _dark: {
+            bg: "blue.900",
+            color: "white",
+            _hover: {
+              bg: "blue.700",
+            },
+          },
         },
-      },
-    },
-    Box: {
-      baseStyle: {
-        padding: 4,
-        borderRadius: "md",
-        border: "1px solid",
-        borderColor: "orange.200",
       },
     },
     FormLabel: {

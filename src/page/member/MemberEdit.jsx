@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Center,
   FormControl,
   FormHelperText,
   FormLabel,
@@ -123,104 +124,108 @@ export function MemberEdit() {
 
   return (
     <Box>
-      <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>회원 정보 수정</Box>
-      <Box>
+      <Center>
         <Box>
-          <FormControl>
-            <FormLabel>이메일</FormLabel>
-            <Input readOnly value={member.email} />
-          </FormControl>
-        </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>암호</FormLabel>
-            <Input
-              onChange={(e) => {
-                setMember({ ...member, password: e.target.value });
-                setPassword(e.target.value);
-              }}
-              type={"password"}
-              value={password}
-              placeholder={"암호를 변경하려면 입력하세요."}
-            />
-            {password.trim().length === 0 && (
-              <FormHelperText>
-                암호를 입력해주세요, 미입력시 기존 암호를 유지합니다.
-              </FormHelperText>
-            )}
-          </FormControl>
-        </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>암호 확인</FormLabel>
-            <Input
-              type={"password"}
-              value={passwordCheck}
-              onChange={(e) => {
-                setPasswordCheck(e.target.value);
-              }}
-            />
-            {!isPasswordChecked && (
-              <FormHelperText>암호가 일치하지 않습니다.</FormHelperText>
-            )}
-          </FormControl>
-        </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>별명</FormLabel>
-            <InputGroup>
-              <Input
-                value={member.nickName}
-                onChange={(e) => {
-                  setNickName(e.target.value.trim());
-                  const newNickName = e.target.value.trim();
-                  setMember({ ...member, nickName: newNickName });
-                  setIsCheckedNickName(newNickName === oldNickName);
-                }}
-              />
-              <InputRightElement w={"75px"}>
-                <Button
-                  isDisabled={isDisabledNickNameCheckButton}
-                  onClick={handleCheckNickName}
-                  size={"sm"}
-                >
-                  중복확인
-                </Button>
-              </InputRightElement>
-            </InputGroup>
-            {isPasswordChecked && nickName.trim().length === 0 && (
-              <FormHelperText>별명을 입력해주세요.</FormHelperText>
-            )}
-          </FormControl>
-        </Box>
-        <Box>
-          <Button
-            isDisabled={isDisabled}
-            onClick={onOpen}
-            colorScheme={"orange"}
-          >
-            저장
-          </Button>
-        </Box>
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>기존 암호 확인</ModalHeader>
-            <ModalBody>
-              <Input
-                type={"password"}
-                onChange={(e) => setOldPassword(e.target.value)}
-              />
-            </ModalBody>
-            <ModalFooter>
-              <Button onClick={onClose}>취소</Button>
-              <Button onClick={handleClickSave} colorScheme={"blue"}>
-                확인
+          <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>회원 정보 수정</Box>
+          <Box>
+            <Box>
+              <FormControl>
+                <FormLabel>이메일</FormLabel>
+                <Input readOnly value={member.email} />
+              </FormControl>
+            </Box>
+            <Box>
+              <FormControl>
+                <FormLabel>암호</FormLabel>
+                <Input
+                  onChange={(e) => {
+                    setMember({ ...member, password: e.target.value });
+                    setPassword(e.target.value);
+                  }}
+                  type={"password"}
+                  value={password}
+                  placeholder={"암호를 변경하려면 입력하세요."}
+                />
+                {password.trim().length === 0 && (
+                  <FormHelperText>
+                    암호를 입력해주세요, 미입력시 기존 암호를 유지합니다.
+                  </FormHelperText>
+                )}
+              </FormControl>
+            </Box>
+            <Box>
+              <FormControl>
+                <FormLabel>암호 확인</FormLabel>
+                <Input
+                  type={"password"}
+                  value={passwordCheck}
+                  onChange={(e) => {
+                    setPasswordCheck(e.target.value);
+                  }}
+                />
+                {!isPasswordChecked && (
+                  <FormHelperText>암호가 일치하지 않습니다.</FormHelperText>
+                )}
+              </FormControl>
+            </Box>
+            <Box>
+              <FormControl>
+                <FormLabel>별명</FormLabel>
+                <InputGroup>
+                  <Input
+                    value={member.nickName}
+                    onChange={(e) => {
+                      setNickName(e.target.value.trim());
+                      const newNickName = e.target.value.trim();
+                      setMember({ ...member, nickName: newNickName });
+                      setIsCheckedNickName(newNickName === oldNickName);
+                    }}
+                  />
+                  <InputRightElement w={"75px"}>
+                    <Button
+                      isDisabled={isDisabledNickNameCheckButton}
+                      onClick={handleCheckNickName}
+                      size={"sm"}
+                    >
+                      중복확인
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+                {isPasswordChecked && nickName.trim().length === 0 && (
+                  <FormHelperText>별명을 입력해주세요.</FormHelperText>
+                )}
+              </FormControl>
+            </Box>
+            <Box>
+              <Button
+                isDisabled={isDisabled}
+                onClick={onOpen}
+                colorScheme={"orange"}
+              >
+                저장
               </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </Box>
+            </Box>
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>기존 암호 확인</ModalHeader>
+                <ModalBody>
+                  <Input
+                    type={"password"}
+                    onChange={(e) => setOldPassword(e.target.value)}
+                  />
+                </ModalBody>
+                <ModalFooter>
+                  <Button onClick={onClose}>취소</Button>
+                  <Button onClick={handleClickSave} colorScheme={"blue"}>
+                    확인
+                  </Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
+          </Box>
+        </Box>
+      </Center>
     </Box>
   );
 }

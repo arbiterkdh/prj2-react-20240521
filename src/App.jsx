@@ -1,5 +1,5 @@
 import React from "react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { IconButton, useColorMode } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home } from "./page/Home.jsx";
 import { BoardWrite } from "./page/board/BoardWrite.jsx";
@@ -11,8 +11,8 @@ import { MemberList } from "./page/member/MemberList.jsx";
 import { MemberInfo } from "./page/member/MemberInfo.jsx";
 import { MemberEdit } from "./page/member/MemberEdit.jsx";
 import { MemberLogin } from "./page/member/MemberLogin.jsx";
-import { theme } from "./Theme.jsx";
 import { LoginProvider } from "./component/LoginProvider.jsx";
+import { FaMoon, FaSun } from "react-icons/fa";
 import axios from "axios";
 
 // axios interceptor 설정
@@ -43,12 +43,23 @@ const router = createBrowserRouter([
 ]);
 
 function App(props) {
+  const { toggleColorMode, colorMode } = useColorMode();
   return (
-    <LoginProvider>
-      <ChakraProvider theme={theme}>
+    <>
+      <LoginProvider>
         <RouterProvider router={router} />
-      </ChakraProvider>
-    </LoginProvider>
+      </LoginProvider>
+      <IconButton
+        aria-label="toggle theme"
+        rounded="full"
+        size="sm"
+        position="absolute"
+        bottom={4}
+        right={4}
+        onClick={toggleColorMode}
+        icon={colorMode === "dark" ? <FaSun /> : <FaMoon />}
+      />
+    </>
   );
 }
 

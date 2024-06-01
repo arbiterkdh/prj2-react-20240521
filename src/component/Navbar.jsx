@@ -25,10 +25,6 @@ export function Navbar() {
         <Box
           onClick={() => navigate("/")}
           cursor={"pointer"}
-          sx={{
-            color: "orange.500",
-            _hover: { color: "orange.400" },
-          }}
           mr={5}
           onMouseEnter={() => setAni1(1)}
           onMouseLeave={() => setAni1(0)}
@@ -50,29 +46,17 @@ export function Navbar() {
         )}
 
         {account.isAdmin() && (
-          <Box
-            onClick={() => navigate("/member/list")}
-            cursor={"pointer"}
-            _hover={{ color: "orange.400" }}
-          >
+          <Box onClick={() => navigate("/member/list")} cursor={"pointer"}>
             회원목록
           </Box>
         )}
         {!account.isLoggedIn() && (
-          <Box
-            onClick={() => navigate("/signup")}
-            cursor={"pointer"}
-            _hover={{ color: "orange.400" }}
-          >
+          <Box onClick={() => navigate("/signup")} cursor={"pointer"}>
             회원가입
           </Box>
         )}
         {!account.isLoggedIn() && (
-          <Box
-            onClick={() => navigate("/login")}
-            cursor={"pointer"}
-            _hover={{ color: "orange.400" }}
-          >
+          <Box onClick={() => navigate("/login")} cursor={"pointer"}>
             로그인
           </Box>
         )}
@@ -83,23 +67,17 @@ export function Navbar() {
               navigate(`/member/${account.id}`);
             }}
             cursor={"pointer"}
-            _hover={{ color: "orange.400" }}
             onMouseEnter={() => setAni3(1)}
             onMouseLeave={() => setAni3(0)}
           >
             {account.nickName} 님
             {ani3 === 0 && (
-              <FontAwesomeIcon
-                icon={faCarrot}
-                color="#DD6B20"
-                style={{ marginLeft: "10px" }}
-              />
+              <FontAwesomeIcon icon={faCarrot} style={{ marginLeft: "10px" }} />
             )}
             {ani3 === 1 && (
               <FontAwesomeIcon
                 icon={faCarrot}
                 shake
-                color="#DD6B20"
                 style={{ marginLeft: "10px" }}
               />
             )}
@@ -117,7 +95,6 @@ export function Navbar() {
               navigate("/login");
             }}
             cursor={"pointer"}
-            _hover={{ color: "red.500" }}
           >
             로그아웃
           </Box>
