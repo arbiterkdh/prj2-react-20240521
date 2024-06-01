@@ -1,19 +1,20 @@
 import { extendTheme } from "@chakra-ui/react";
 
-export const theme = extendTheme({
+export const customTheme = extendTheme({
   styles: {
     global: {
       body: {
         bg: "orange.50",
         color: "#652B19",
         _dark: {
-          bg: "whiteAlpha.100",
-          color: "RGBA(255, 255, 255, 0.80)",
+          bg: "#0A1C37",
+          color: "#D4E5FE",
         },
       },
     },
   },
   components: {
+    CustomCenter: {},
     Table: {
       baseStyle: {
         table: {
@@ -26,8 +27,8 @@ export const theme = extendTheme({
               color: "orange.100",
               fontSize: "1.2rem",
               _dark: {
-                bg: "blue.900",
-                color: "RGBA(255, 255, 255, 0.80)",
+                bg: "#19355B",
+                color: "#132237",
               },
             },
           },
@@ -35,7 +36,7 @@ export const theme = extendTheme({
             tr: {
               _dark: {
                 _hover: {
-                  bg: "blue.800",
+                  bg: "#132337",
                 },
               },
               cursor: "pointer",
@@ -50,17 +51,18 @@ export const theme = extendTheme({
     Input: {
       baseStyle: {
         field: {
-          width: "100%",
+          width: "99%",
           zIndex: 1,
           margin: "5px",
           borderColor: "orange",
+          bg: "white",
           boxShadow: "0 0 0 1px lightgray",
           _focus: {
             borderColor: "orange",
             boxShadow: "0 0 0 2px orange",
           },
           _dark: {
-            bg: "whiteAlpha.50",
+            bg: "blackAlpha.200",
             borderColor: "gray",
             boxShadow: "0 0 0 1px gray",
             _focus: {
@@ -73,6 +75,7 @@ export const theme = extendTheme({
       variants: {
         noBorder: {
           field: {
+            width: "99%",
             border: "none",
             boxShadow: "none",
             _hover: {
@@ -125,7 +128,7 @@ export const theme = extendTheme({
     Textarea: {
       baseStyle: {
         margin: "5px",
-        width: "30%",
+        width: "99%",
         zIndex: 1,
         borderColor: "orange",
         boxShadow: "0 0 0 1px lightgray",
@@ -135,7 +138,7 @@ export const theme = extendTheme({
           boxShadow: "0 0 0 2px orange",
         },
         _dark: {
-          bg: "whiteAlpha.50",
+          bg: "blackAlpha.300",
           _focus: {
             borderColor: "gray",
             boxShadow: "0 0 0 2px gray",
@@ -158,7 +161,7 @@ export const theme = extendTheme({
             boxShadow: "none",
           },
           _dark: {
-            bg: "whiteAlpha.50",
+            bg: "blackAlpha.300",
             _focus: {
               borderColor: "none",
               boxShadow: "none",

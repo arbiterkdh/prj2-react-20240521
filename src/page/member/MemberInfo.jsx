@@ -18,6 +18,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { LoginContext } from "../../component/LoginProvider.jsx";
+import CustomCenter from "../../theme/component/CustomCenter.jsx";
 
 export function MemberInfo() {
   const account = useContext(LoginContext);
@@ -94,65 +95,71 @@ export function MemberInfo() {
   }
 
   return (
-    <Box>
-      <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>
-        {member.id}번 회원 정보
-      </Box>
+    <CustomCenter>
       <Box>
-        <Box>
-          <FormControl>이메일</FormControl>
-          <Input value={member.email} readOnly />
+        <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>
+          {member.id}번 회원 정보
         </Box>
         <Box>
-          <FormControl>별명</FormControl>
-          <Input value={member.nickName} readOnly />
-        </Box>
-        <Box>
-          <FormControl>가입일시</FormControl>
-          <Input value={member.signupDateAndTime} readOnly />
-        </Box>
-        {account.hasAccess(member.id) && (
           <Box>
-            <Button
-              onClick={() => navigate(`/member/edit/${member.id}`)}
-              colorScheme={"purple"}
-              mr={1}
-            >
-              수정
-            </Button>
-            <Button colorScheme={"red"} onClick={onOpen}>
-              탈퇴
-            </Button>
+            <FormControl>이메일</FormControl>
+            <Input value={member.email} readOnly variant={"noBorder"} />
           </Box>
-        )}
-
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader color={"gray.500"}>탈퇴 확인</ModalHeader>
-            <ModalBody>
-              <FormControl>
-                <FormLabel>암호</FormLabel>
-                <Input
-                  value={password}
-                  type={"password"}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </FormControl>
-            </ModalBody>
-            <ModalFooter>
-              <Button onClick={onClose}>취소</Button>
+          <Box>
+            <FormControl>별명</FormControl>
+            <Input value={member.nickName} readOnly variant={"noBorder"} />
+          </Box>
+          <Box>
+            <FormControl>가입일시</FormControl>
+            <Input
+              value={member.signupDateAndTime}
+              readOnly
+              variant={"noBorder"}
+            />
+          </Box>
+          {account.hasAccess(member.id) && (
+            <Box>
               <Button
-                isLoading={isLoading}
-                onClick={handleClickRemove}
-                colorScheme={"blue"}
+                onClick={() => navigate(`/member/edit/${member.id}`)}
+                colorScheme={"purple"}
+                mr={1}
               >
-                확인
+                수정
               </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+              <Button colorScheme={"red"} onClick={onOpen}>
+                탈퇴
+              </Button>
+            </Box>
+          )}
+
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader color={"gray.500"}>탈퇴 확인</ModalHeader>
+              <ModalBody>
+                <FormControl>
+                  <FormLabel>암호</FormLabel>
+                  <Input
+                    value={password}
+                    type={"password"}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </FormControl>
+              </ModalBody>
+              <ModalFooter>
+                <Button onClick={onClose}>취소</Button>
+                <Button
+                  isLoading={isLoading}
+                  onClick={handleClickRemove}
+                  colorScheme={"blue"}
+                >
+                  확인
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </Box>
       </Box>
-    </Box>
+    </CustomCenter>
   );
 }

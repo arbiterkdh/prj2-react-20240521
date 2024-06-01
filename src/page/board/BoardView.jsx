@@ -28,6 +28,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp as fullyThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp as emptyThumbsUp } from "@fortawesome/free-regular-svg-icons/faThumbsUp";
 import { CommentComponent } from "../../component/CommentComponent.jsx";
+import CustomCenter from "../../theme/component/CustomCenter.jsx";
 
 export function BoardView() {
   const account = useContext(LoginContext);
@@ -115,120 +116,122 @@ export function BoardView() {
   }
 
   return (
-    <Box>
-      <Flex>
-        <Heading sx={{ padding: "10px", fontSize: "1.5rem" }}>
-          <Box>{board.id}번 게시물</Box>
-        </Heading>
-        <Spacer />
-        {isLikeProcessing || (
-          <Flex>
-            <Tooltip
-              isDisabled={account.isLoggedIn()}
-              label={"로그인 해주세요."}
-              hasArrow
-            >
-              <Box
-                onClick={handleClickLike}
-                color={"blue.400"}
-                fontSize={"3xl"}
-                cursor={"pointer"}
+    <CustomCenter>
+      <Box>
+        <Flex>
+          <Heading sx={{ padding: "10px", fontSize: "1.5rem" }}>
+            <Box>{board.id}번 게시물</Box>
+          </Heading>
+          <Spacer />
+          {isLikeProcessing || (
+            <Flex>
+              <Tooltip
+                isDisabled={account.isLoggedIn()}
+                label={"로그인 해주세요."}
+                hasArrow
               >
-                {like.like && <FontAwesomeIcon icon={fullyThumbsUp} />}
-                {like.like || <FontAwesomeIcon icon={emptyThumbsUp} />}
-              </Box>
-            </Tooltip>
-            <Box fontSize={"3xl"}>{like.count}</Box>
-          </Flex>
-        )}
-        {isLikeProcessing && (
-          <Box pr={5}>
-            <Spinner />
-          </Box>
-        )}
-      </Flex>
-      <Box>
-        <FormControl>
-          <FormLabel>제목</FormLabel>
-          <Input value={board.title} variant={"noBorder"} readOnly />
-        </FormControl>
-      </Box>
-      <Box>
-        <FormControl>
-          <FormLabel>본문</FormLabel>
-          <Textarea value={board.content} variant={"noBorder"} readOnly />
-        </FormControl>
-      </Box>
-      <Box>
-        {board.fileList &&
-          board.fileList.map((file) => (
-            <Box key={file.name}>
-              <Image src={file.src} />
+                <Box
+                  onClick={handleClickLike}
+                  color={"blue.400"}
+                  fontSize={"3xl"}
+                  cursor={"pointer"}
+                >
+                  {like.like && <FontAwesomeIcon icon={fullyThumbsUp} />}
+                  {like.like || <FontAwesomeIcon icon={emptyThumbsUp} />}
+                </Box>
+              </Tooltip>
+              <Box fontSize={"3xl"}>{like.count}</Box>
+            </Flex>
+          )}
+          {isLikeProcessing && (
+            <Box pr={5}>
+              <Spinner />
             </Box>
-          ))}
-      </Box>
-      <Box>
-        <FormControl>
-          <FormLabel>작성자</FormLabel>
-          <Input value={board.writer} variant={"noBorder"} readOnly />
-        </FormControl>
-      </Box>
-      <Box>
-        <FormControl>
-          <FormLabel>작성일시</FormLabel>
-        </FormControl>
-        <Input
-          type={"datetime-local"}
-          value={board.inserted}
-          variant={"noBorder"}
-          readOnly
-        />
-      </Box>
-      <Box>
-        <FormControl>
-          <FormLabel>조회수</FormLabel>
-        </FormControl>
-        <Input value={board.views} readOnly variant={"noBorder"} />
-      </Box>
-      <Flex justifyContent="space-between">
+          )}
+        </Flex>
         <Box>
-          <Flex>
-            <Button>이전 글</Button>
-            <Button>목록</Button>
-            <Button>다음 글</Button>
-          </Flex>
+          <FormControl>
+            <FormLabel>제목</FormLabel>
+            <Input value={board.title} variant={"noBorder"} readOnly />
+          </FormControl>
         </Box>
-        {account.hasAccess(board.memberId) && (
+        <Box>
+          <FormControl>
+            <FormLabel>본문</FormLabel>
+            <Textarea value={board.content} variant={"noBorder"} readOnly />
+          </FormControl>
+        </Box>
+        <Box>
+          {board.fileList &&
+            board.fileList.map((file) => (
+              <Box key={file.name}>
+                <Image src={file.src} />
+              </Box>
+            ))}
+        </Box>
+        <Box>
+          <FormControl>
+            <FormLabel>작성자</FormLabel>
+            <Input value={board.writer} variant={"noBorder"} readOnly />
+          </FormControl>
+        </Box>
+        <Box>
+          <FormControl>
+            <FormLabel>작성일시</FormLabel>
+          </FormControl>
+          <Input
+            type={"datetime-local"}
+            value={board.inserted}
+            variant={"noBorder"}
+            readOnly
+          />
+        </Box>
+        <Box>
+          <FormControl>
+            <FormLabel>조회수</FormLabel>
+          </FormControl>
+          <Input value={board.views} readOnly variant={"noBorder"} />
+        </Box>
+        <Flex justifyContent="space-between">
           <Box>
-            <Button
-              colorScheme={"purple"}
-              onClick={() => navigate(`/edit/${board.id}`)}
-              mr={1}
-            >
-              수정
-            </Button>
-            <Button colorScheme={"red"} onClick={onOpen}>
-              삭제
-            </Button>
+            <Flex>
+              <Button>이전 글</Button>
+              <Button>목록</Button>
+              <Button>다음 글</Button>
+            </Flex>
           </Box>
-        )}
-      </Flex>
+          {account.hasAccess(board.memberId) && (
+            <Box>
+              <Button
+                colorScheme={"purple"}
+                onClick={() => navigate(`/edit/${board.id}`)}
+                mr={1}
+              >
+                수정
+              </Button>
+              <Button colorScheme={"red"} onClick={onOpen}>
+                삭제
+              </Button>
+            </Box>
+          )}
+        </Flex>
 
-      <CommentComponent boardId={board.id} />
+        <CommentComponent boardId={board.id} />
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader></ModalHeader>
-          <ModalBody>삭제하시겠습니까?</ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose}>취소</Button>
-            <Button colorScheme={"red"} onClick={handleClickRemove}>
-              확인
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </Box>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader></ModalHeader>
+            <ModalBody>삭제하시겠습니까?</ModalBody>
+            <ModalFooter>
+              <Button onClick={onClose}>취소</Button>
+              <Button colorScheme={"red"} onClick={handleClickRemove}>
+                확인
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Box>
+    </CustomCenter>
   );
 }
