@@ -13,6 +13,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../component/LoginProvider.jsx";
 import CustomCenter from "../../theme/component/CustomCenter.jsx";
+import OutestBox from "../../theme/component/Box/OutestBox.jsx";
 
 export function BoardWrite() {
   const account = useContext(LoginContext);
@@ -70,56 +71,58 @@ export function BoardWrite() {
 
   return (
     <CustomCenter>
-      <Box>
-        <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>글 작성 화면</Box>
+      <OutestBox>
         <Box>
-          <FormControl>
-            <FormLabel>제목</FormLabel>
-            <Input onChange={(e) => setTitle(e.target.value.trim())} />
-          </FormControl>
+          <Box sx={{ padding: "10px", fontSize: "1.5rem" }}>글 작성 화면</Box>
+          <Box>
+            <FormControl>
+              <FormLabel>제목</FormLabel>
+              <Input onChange={(e) => setTitle(e.target.value.trim())} />
+            </FormControl>
+          </Box>
+          <Box>
+            <FormControl>
+              <FormLabel>본문</FormLabel>
+              <Textarea onChange={(e) => setContent(e.target.value)} />
+            </FormControl>
+          </Box>
+          <Box>
+            <FormControl>
+              <FormLabel>파일</FormLabel>
+              <Input
+                multiple
+                type={"file"}
+                accept={"image/*"}
+                onChange={(e) => {
+                  setFiles(e.target.files);
+                }}
+              />
+              <FormHelperText>
+                총 용량은 10MB, 파일 하나당 1MB 를 초과할 수 없습니다.
+              </FormHelperText>
+            </FormControl>
+          </Box>
+          <Box>
+            <ul>{fileNameList}</ul>
+          </Box>
+          <Box>
+            <FormControl>
+              <FormLabel>작성자</FormLabel>
+              <Input readOnly value={account.nickName} />
+            </FormControl>
+          </Box>
+          <Box>
+            <Button
+              isLoading={loading}
+              isDisabled={disableSaveButton}
+              colorScheme={"blue"}
+              onClick={handleSaveClick}
+            >
+              저장
+            </Button>
+          </Box>
         </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>본문</FormLabel>
-            <Textarea onChange={(e) => setContent(e.target.value)} />
-          </FormControl>
-        </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>파일</FormLabel>
-            <Input
-              multiple
-              type={"file"}
-              accept={"image/*"}
-              onChange={(e) => {
-                setFiles(e.target.files);
-              }}
-            />
-            <FormHelperText>
-              총 용량은 10MB, 파일 하나당 1MB 를 초과할 수 없습니다.
-            </FormHelperText>
-          </FormControl>
-        </Box>
-        <Box>
-          <ul>{fileNameList}</ul>
-        </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>작성자</FormLabel>
-            <Input readOnly value={account.nickName} />
-          </FormControl>
-        </Box>
-        <Box>
-          <Button
-            isLoading={loading}
-            isDisabled={disableSaveButton}
-            colorScheme={"blue"}
-            onClick={handleSaveClick}
-          >
-            저장
-          </Button>
-        </Box>
-      </Box>
+      </OutestBox>
     </CustomCenter>
   );
 }

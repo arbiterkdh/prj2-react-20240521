@@ -26,6 +26,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { LoginContext } from "../LoginProvider.jsx";
+import CustomBox from "../../theme/component/Box/CustomBox.jsx";
 
 export function CommentItem({
   comment,
@@ -100,86 +101,89 @@ export function CommentItem({
   }
 
   return (
-    <Box m={1} h={40}>
-      <Flex>
-        <Box>{comment.nickName} 님</Box>
-        <Spacer />
-        <Box>작성일시: {comment.inserted}</Box>
-      </Flex>
-      <Flex>
-        {modify && (
-          <Textarea
-            value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
-            w={"90%"}
-          />
-        )}
-        {modify || <Box>{comment.comment}</Box>}
-        <Spacer />
-        <Box>
-          {account.hasAccess(comment.memberId) && (
-            <Box>
-              <Button
-                onClick={
-                  modify
-                    ? onOpen
-                    : () => {
-                        setModify(true);
-                      }
-                }
-                onMouseEnter={() => setMouse2(1)}
-                onMouseLeave={() => setMouse2(0)}
-              >
-                {mouse2 === 0 && <FontAwesomeIcon icon={emptyPen} />}
-                {mouse2 === 1 && <FontAwesomeIcon icon={solidPen} />}
-              </Button>
-              {modify || (
-                <Button
-                  onClick={() => {
-                    setDeleteComment(true);
-                    onOpen();
-                  }}
-                  onMouseEnter={() => setMouse(1)}
-                  onMouseLeave={() => setMouse(0)}
-                >
-                  {mouse === 0 && <FontAwesomeIcon icon={emptyCan} />}
-                  {mouse === 1 && <FontAwesomeIcon icon={solidCan} />}
-                </Button>
-              )}
-              {modify && (
-                <Button
-                  onClick={() => {
-                    setModify(false);
-                    setCommentText(comment.comment);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faXmark} />
-                </Button>
-              )}
-            </Box>
+    <CustomBox>
+      <Box>
+        <Flex>
+          <Box>{comment.nickName} 님</Box>
+          <Spacer />
+          <Box>작성일시: {comment.inserted}</Box>
+        </Flex>
+        <Flex>
+          {modify && (
+            <Textarea
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+            />
           )}
-        </Box>
-      </Flex>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader></ModalHeader>
-          {deleteComment && <ModalBody>댓글을 지우시겠습니까?</ModalBody>}
-          {modify && <ModalBody>이대로 수정하시겠습니까?</ModalBody>}
-          <ModalFooter>
-            <Button
-              onClick={() => {
-                setDeleteComment(false);
-                onClose();
-              }}
-            >
-              취소
-            </Button>
-            {deleteComment && <Button onClick={handleRemoveClick}>삭제</Button>}
-            {modify && <Button onClick={handleModifyClick}>수정</Button>}
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </Box>
+          {modify || <Box>{comment.comment}</Box>}
+          <Spacer />
+          <Box>
+            {account.hasAccess(comment.memberId) && (
+              <Box>
+                <Button
+                  onClick={
+                    modify
+                      ? onOpen
+                      : () => {
+                          setModify(true);
+                        }
+                  }
+                  onMouseEnter={() => setMouse2(1)}
+                  onMouseLeave={() => setMouse2(0)}
+                >
+                  {mouse2 === 0 && <FontAwesomeIcon icon={emptyPen} />}
+                  {mouse2 === 1 && <FontAwesomeIcon icon={solidPen} />}
+                </Button>
+                {modify || (
+                  <Button
+                    onClick={() => {
+                      setDeleteComment(true);
+                      onOpen();
+                    }}
+                    onMouseEnter={() => setMouse(1)}
+                    onMouseLeave={() => setMouse(0)}
+                  >
+                    {mouse === 0 && <FontAwesomeIcon icon={emptyCan} />}
+                    {mouse === 1 && <FontAwesomeIcon icon={solidCan} />}
+                  </Button>
+                )}
+                {modify && (
+                  <Button
+                    onClick={() => {
+                      setModify(false);
+                      setCommentText(comment.comment);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faXmark} />
+                  </Button>
+                )}
+              </Box>
+            )}
+          </Box>
+        </Flex>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader></ModalHeader>
+            {deleteComment && <ModalBody>댓글을 지우시겠습니까?</ModalBody>}
+            {modify && <ModalBody>이대로 수정하시겠습니까?</ModalBody>}
+            <ModalFooter>
+              <Button
+                onClick={() => {
+                  setDeleteComment(false);
+                  onClose();
+                }}
+              >
+                취소
+              </Button>
+              {deleteComment && (
+                <Button onClick={handleRemoveClick}>삭제</Button>
+              )}
+              {modify && <Button onClick={handleModifyClick}>수정</Button>}
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Box>
+    </CustomBox>
   );
 }

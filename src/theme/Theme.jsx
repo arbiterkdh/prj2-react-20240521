@@ -14,7 +14,6 @@ export const customTheme = extendTheme({
     },
   },
   components: {
-    CustomCenter: {},
     Table: {
       baseStyle: {
         table: {

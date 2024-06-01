@@ -3,6 +3,7 @@ import { CommentWrite } from "./comment/CommentWrite.jsx";
 import { CommentList } from "./comment/CommentList.jsx";
 import { useContext, useState } from "react";
 import { LoginContext } from "./LoginProvider.jsx";
+import OutestBox from "../theme/component/Box/OutestBox.jsx";
 
 export function CommentComponent({ boardId }) {
   const [isSending, setIsSending] = useState(false);
@@ -11,22 +12,24 @@ export function CommentComponent({ boardId }) {
   const account = useContext(LoginContext);
 
   return (
-    <Box>
-      {account.isLoggedIn() && (
-        <CommentWrite
+    <OutestBox>
+      <Box>
+        {account.isLoggedIn() && (
+          <CommentWrite
+            boardId={boardId}
+            isSending={isSending}
+            setIsSending={setIsSending}
+          />
+        )}
+        <CommentList
           boardId={boardId}
           isSending={isSending}
-          setIsSending={setIsSending}
+          isRemoving={isRemoving}
+          setIsRemoving={setIsRemoving}
+          isModifying={isModifying}
+          setIsModifying={setIsModifying}
         />
-      )}
-      <CommentList
-        boardId={boardId}
-        isSending={isSending}
-        isRemoving={isRemoving}
-        setIsRemoving={setIsRemoving}
-        isModifying={isModifying}
-        setIsModifying={setIsModifying}
-      />
-    </Box>
+      </Box>
+    </OutestBox>
   );
 }

@@ -29,6 +29,7 @@ import { faThumbsUp as fullyThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp as emptyThumbsUp } from "@fortawesome/free-regular-svg-icons/faThumbsUp";
 import { CommentComponent } from "../../component/CommentComponent.jsx";
 import CustomCenter from "../../theme/component/CustomCenter.jsx";
+import OutestBox from "../../theme/component/Box/OutestBox.jsx";
 
 export function BoardView() {
   const account = useContext(LoginContext);
@@ -118,104 +119,107 @@ export function BoardView() {
   return (
     <CustomCenter>
       <Box>
-        <Flex>
-          <Heading sx={{ padding: "10px", fontSize: "1.5rem" }}>
-            <Box>{board.id}번 게시물</Box>
-          </Heading>
-          <Spacer />
-          {isLikeProcessing || (
-            <Flex>
-              <Tooltip
-                isDisabled={account.isLoggedIn()}
-                label={"로그인 해주세요."}
-                hasArrow
-              >
-                <Box
-                  onClick={handleClickLike}
-                  color={"blue.400"}
-                  fontSize={"3xl"}
-                  cursor={"pointer"}
-                >
-                  {like.like && <FontAwesomeIcon icon={fullyThumbsUp} />}
-                  {like.like || <FontAwesomeIcon icon={emptyThumbsUp} />}
-                </Box>
-              </Tooltip>
-              <Box fontSize={"3xl"}>{like.count}</Box>
-            </Flex>
-          )}
-          {isLikeProcessing && (
-            <Box pr={5}>
-              <Spinner />
-            </Box>
-          )}
-        </Flex>
-        <Box>
-          <FormControl>
-            <FormLabel>제목</FormLabel>
-            <Input value={board.title} variant={"noBorder"} readOnly />
-          </FormControl>
-        </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>본문</FormLabel>
-            <Textarea value={board.content} variant={"noBorder"} readOnly />
-          </FormControl>
-        </Box>
-        <Box>
-          {board.fileList &&
-            board.fileList.map((file) => (
-              <Box key={file.name}>
-                <Image src={file.src} />
-              </Box>
-            ))}
-        </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>작성자</FormLabel>
-            <Input value={board.writer} variant={"noBorder"} readOnly />
-          </FormControl>
-        </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>작성일시</FormLabel>
-          </FormControl>
-          <Input
-            type={"datetime-local"}
-            value={board.inserted}
-            variant={"noBorder"}
-            readOnly
-          />
-        </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>조회수</FormLabel>
-          </FormControl>
-          <Input value={board.views} readOnly variant={"noBorder"} />
-        </Box>
-        <Flex justifyContent="space-between">
+        <OutestBox>
           <Box>
             <Flex>
-              <Button>이전 글</Button>
-              <Button>목록</Button>
-              <Button>다음 글</Button>
+              <Heading sx={{ padding: "10px", fontSize: "1.5rem" }}>
+                <Box>{board.id}번 게시물</Box>
+              </Heading>
+              <Spacer />
+              {isLikeProcessing || (
+                <Flex>
+                  <Tooltip
+                    isDisabled={account.isLoggedIn()}
+                    label={"로그인 해주세요."}
+                    hasArrow
+                  >
+                    <Box
+                      onClick={handleClickLike}
+                      color={"blue.400"}
+                      fontSize={"3xl"}
+                      cursor={"pointer"}
+                    >
+                      {like.like && <FontAwesomeIcon icon={fullyThumbsUp} />}
+                      {like.like || <FontAwesomeIcon icon={emptyThumbsUp} />}
+                    </Box>
+                  </Tooltip>
+                  <Box fontSize={"3xl"}>{like.count}</Box>
+                </Flex>
+              )}
+              {isLikeProcessing && (
+                <Box pr={5}>
+                  <Spinner />
+                </Box>
+              )}
+            </Flex>
+            <Box>
+              <FormControl>
+                <FormLabel>제목</FormLabel>
+                <Input value={board.title} variant={"noBorder"} readOnly />
+              </FormControl>
+            </Box>
+            <Box>
+              <FormControl>
+                <FormLabel>본문</FormLabel>
+                <Textarea value={board.content} variant={"noBorder"} readOnly />
+              </FormControl>
+            </Box>
+            <Box>
+              {board.fileList &&
+                board.fileList.map((file) => (
+                  <Box key={file.name}>
+                    <Image src={file.src} />
+                  </Box>
+                ))}
+            </Box>
+            <Box>
+              <FormControl>
+                <FormLabel>작성자</FormLabel>
+                <Input value={board.writer} variant={"noBorder"} readOnly />
+              </FormControl>
+            </Box>
+            <Box>
+              <FormControl>
+                <FormLabel>작성일시</FormLabel>
+              </FormControl>
+              <Input
+                type={"datetime-local"}
+                value={board.inserted}
+                variant={"noBorder"}
+                readOnly
+              />
+            </Box>
+            <Box>
+              <FormControl>
+                <FormLabel>조회수</FormLabel>
+              </FormControl>
+              <Input value={board.views} readOnly variant={"noBorder"} />
+            </Box>
+            <Flex justifyContent="space-between">
+              <Box>
+                <Flex>
+                  <Button>이전 글</Button>
+                  <Button>목록</Button>
+                  <Button>다음 글</Button>
+                </Flex>
+              </Box>
+              {account.hasAccess(board.memberId) && (
+                <Box>
+                  <Button
+                    colorScheme={"purple"}
+                    onClick={() => navigate(`/edit/${board.id}`)}
+                    mr={1}
+                  >
+                    수정
+                  </Button>
+                  <Button colorScheme={"red"} onClick={onOpen}>
+                    삭제
+                  </Button>
+                </Box>
+              )}
             </Flex>
           </Box>
-          {account.hasAccess(board.memberId) && (
-            <Box>
-              <Button
-                colorScheme={"purple"}
-                onClick={() => navigate(`/edit/${board.id}`)}
-                mr={1}
-              >
-                수정
-              </Button>
-              <Button colorScheme={"red"} onClick={onOpen}>
-                삭제
-              </Button>
-            </Box>
-          )}
-        </Flex>
-
+        </OutestBox>
         <CommentComponent boardId={board.id} />
 
         <Modal isOpen={isOpen} onClose={onClose}>
